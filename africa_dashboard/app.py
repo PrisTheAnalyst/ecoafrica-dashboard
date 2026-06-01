@@ -1,22 +1,25 @@
-import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
+import sys
+import os
 import base64
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
+
 import streamlit as st
 import plotly.graph_objects as go
 
 from config import CSS, ANGOLA, BLUE, GOLD, WHITE, MUTED, MUTED_L, BG, CARD, CARD_L, BORDER
-import _africa    as africa
-import _angola    as angola_page
-import financas   as financas_page
+import _africa     as africa
+import _angola     as angola_page
+import financas    as financas_page
 import dicionario  as dicionario_page
-import extras     as extras_page
+import extras      as extras_page
 from data_loader import load, compute_metrics
 
 
 st.set_page_config(
     page_title="EcoÁfrica · PIB 2000–2023",
-    page_icon="assets/fundo.png",
+    page_icon=os.path.join(BASE_DIR, "assets", "fundo.png"),
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -31,11 +34,10 @@ def img_b64(path):
         return base64.b64encode(f.read()).decode()
 
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown('<div class="nav-brand">EcoÁfrica</div>', unsafe_allow_html=True)
     st.markdown('<div class="nav-version">Analista</div>', unsafe_allow_html=True)
-    st.markdown('<div class="nav-sub" style="margin-top:8px">PIB ·2000 – 2023</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-sub" style="margin-top:8px">PIB · 2000 – 2023</div>', unsafe_allow_html=True)
     st.markdown('<div class="nav-label">Navegação</div>', unsafe_allow_html=True)
 
     pagina = st.radio(
@@ -44,7 +46,6 @@ with st.sidebar:
         label_visibility="collapsed",
     )
 
-    # Separador visual antes das abas de suporte
     st.markdown(
         f'<div style="border-top:1px solid {BORDER};margin:.8rem 0 .4rem;'
         f'color:{MUTED};font-size:9px;letter-spacing:.1em;text-transform:uppercase">'
@@ -57,18 +58,15 @@ with st.sidebar:
         Fonte: World Bank<br>
         30 países africanos<br>
         2000 – 2023<br><br>
-        <span style="color:{ANGOLA};font-weight:600">Angola</span> #8 em África<br>
+        <span style="color:{ANGOLA};font-weight:600">Angola</span> — #8 em África<br>
         <span style="color:#4ADE80;font-weight:600">+831%</span> crescimento acumulado<br>
         <span style="color:#F87171;font-weight:600">−39,8%</span> impacto COVID
     </div>
     """, unsafe_allow_html=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# CAPA
-# ══════════════════════════════════════════════════════════════════════════════
 if pagina == "Capa":
-    img = img_b64("assets/mumuila.png")
+    img = img_b64(os.path.join(BASE_DIR, "assets", "mumuila.png"))
 
     st.markdown(f"""
     <style>
@@ -112,10 +110,8 @@ if pagina == "Capa":
     .cover-line {{ width:40px; height:2px; background:{ANGOLA}; border-radius:2px; margin-bottom:16px; }}
     .cover-desc {{ color:#B0A898; font-size:13px; line-height:1.8; margin-bottom:28px; }}
     .cover-stats {{ display:flex; gap:28px; align-items:flex-end; flex-wrap:wrap; }}
-    .cs-val   {{ color:{WHITE}; font-size:24px; font-weight:800;
-                font-variant-numeric:tabular-nums; }}
-    .cs-label {{ color:{MUTED}; font-size:9px; letter-spacing:.1em;
-                text-transform:uppercase; margin-top:3px; }}
+    .cs-val   {{ color:{WHITE}; font-size:24px; font-weight:800; font-variant-numeric:tabular-nums; }}
+    .cs-label {{ color:{MUTED}; font-size:9px; letter-spacing:.1em; text-transform:uppercase; margin-top:3px; }}
     .cs-div   {{ width:1px; height:32px; background:#1E1E32; align-self:center; }}
     </style>
 
@@ -124,7 +120,7 @@ if pagina == "Capa":
         <div class="cover-overlay"></div>
         <div class="cover-content">
             <div class="cover-eyebrow">Análise Económica · 2000 – 2023</div>
-            <div class="cover-title">ÁFRICA<br>PIB & amp;<br>CRESCIMENTO</div>
+            <div class="cover-title">ÁFRICA<br>PIB &amp;<br>CRESCIMENTO</div>
             <div class="cover-subtitle">30 Países · 23 Anos de Dados</div>
             <div class="cover-line"></div>
             <div class="cover-desc">
@@ -157,7 +153,6 @@ if pagina == "Capa":
     </div>
     """, unsafe_allow_html=True)
 
-    # Gráfico preview
     s_tot = s.groupby(["Ano", "Era_Económica", "Ordem_Era"])["PIB_USD_Bilhões"].sum().reset_index().sort_values("Ano")
     s_ago = s[s["Código_ISO3"] == "AGO"].sort_values("Ano")
 
@@ -187,10 +182,9 @@ if pagina == "Capa":
         paper_bgcolor=CARD, plot_bgcolor=CARD,
         height=270, margin=dict(l=12, r=12, t=36, b=12),
         font=dict(color=MUTED, size=11),
-        title=dict(text="Evolução do PIB África Total vs Angola (2000–2023)",
+        title=dict(text="Evolução do PIB — África Total vs Angola (2000–2023)",
                    font=dict(color=WHITE, size=13, weight=600), x=0),
-        xaxis=dict(gridcolor="#14142A", zeroline=False, tickmode="array",
-                   tickvals=sorted(anos_disp)),
+        xaxis=dict(gridcolor="#14142A", zeroline=False, tickmode="array", tickvals=sorted(anos_disp)),
         yaxis=dict(gridcolor="#14142A", zeroline=False,
                    title=dict(text="PIB ($B)", font=dict(color=MUTED, size=10))),
         legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=MUTED, size=11)),
@@ -198,28 +192,27 @@ if pagina == "Capa":
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    # Pills das novas abas na capa
     st.markdown(f"""
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin:.8rem 0">
         <div style="background:#0F1A0F;border:1px solid #1E321E;border-radius:8px;
                     padding:6px 14px;font-size:11px;color:#B0C8B0">
-            📊 <strong style="color:#F5F0E8">África</strong> visão continental
+            <strong style="color:#F5F0E8">Africa</strong> — visão continental
         </div>
         <div style="background:#1A0F00;border:1px solid {ANGOLA}44;border-radius:8px;
                     padding:6px 14px;font-size:11px;color:#C8B890">
-            🇦🇴 <strong style="color:{ANGOLA}">Angola</strong> posição e comparação
+            <strong style="color:{ANGOLA}">Angola</strong> — posição e comparação
         </div>
         <div style="background:#0F0F1A;border:1px solid #2A1A6A;border-radius:8px;
                     padding:6px 14px;font-size:11px;color:{MUTED_L}">
-            💰 <strong style="color:#F5F0E8">Finanças</strong> dívida & inflação
+            <strong style="color:#F5F0E8">Finanças</strong> — dívida & inflação
         </div>
         <div style="background:#0F0F1A;border:1px solid {BORDER};border-radius:8px;
                     padding:6px 14px;font-size:11px;color:{MUTED_L}">
-            📋 <strong style="color:#F5F0E8">Dicionário</strong> glossário & KPIs
+            <strong style="color:#F5F0E8">Dicionário</strong> — glossário & KPIs
         </div>
         <div style="background:#0F0F1A;border:1px solid {BORDER};border-radius:8px;
                     padding:6px 14px;font-size:11px;color:{MUTED_L}">
-            🗺️ <strong style="color:#F5F0E8">Extras</strong> changelog & roadmap
+            <strong style="color:#F5F0E8">Extras</strong> — changelog & roadmap
         </div>
     </div>
     """, unsafe_allow_html=True)

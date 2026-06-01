@@ -1,20 +1,23 @@
+import os
 import pandas as pd
 import streamlit as st
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 @st.cache_data
 def load():
-    p = pd.read_csv("data/paises.csv",          sep=";", decimal=",")
-    s = pd.read_csv("data/serie_temporal.csv",   sep=";", decimal=",")
-    r = pd.read_csv("data/regioes.csv",          sep=";", decimal=",")
+    p = pd.read_csv(os.path.join(BASE_DIR, "data", "paises.csv"),        sep=";", decimal=",")
+    s = pd.read_csv(os.path.join(BASE_DIR, "data", "serie_temporal.csv"), sep=";", decimal=",")
+    r = pd.read_csv(os.path.join(BASE_DIR, "data", "regioes.csv"),        sep=";", decimal=",")
     return p, s, r
 
 
 @st.cache_data
 def compute_metrics(p, s):
-    pib23      = p["PIB_2023_USD_Bilhões"].sum()
-    pib00      = p["PIB_2000_USD_Bilhões"].sum()
-    cresc_cont = (pib23 - pib00) / pib00 * 100
+    pib23       = p["PIB_2023_USD_Bilhões"].sum()
+    pib00       = p["PIB_2000_USD_Bilhões"].sum()
+    cresc_cont  = (pib23 - pib00) / pib00 * 100
     media_pibpc = p["PIB_por_Habitante_2023_USD"].mean()
     media_cresc = p["Crescimento_Acumulado_2000_2023_%"].mean()
     acima_media = (p["PIB_por_Habitante_2023_USD"] > media_pibpc).sum()
