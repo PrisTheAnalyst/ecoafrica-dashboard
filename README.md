@@ -12,7 +12,7 @@ Construído com Python, Streamlit e Plotly. Dados: World Bank Open Data.
 EcoÁfrica é um dashboard analítico que explora a evolução do PIB africano entre 2000 e 2023,
 cobrindo 30 países, 7 eras económicas e indicadores de finanças públicas.
 
-O projecto tem foco especial em **Angola** — crescimento acumulado de +831%,
+O projecto tem foco especial em **Angola** crescimento acumulado de +831%,
 posição #8 em África, e a tensão entre crescimento macroeconómico e bem-estar por habitante.
 
 ---
@@ -89,10 +89,10 @@ Qualquer push para `main` faz re-deploy automático.
 ## Stack técnica
 
 * **Python 3.11**
-* **Streamlit** — interface e navegação
-* **Plotly** — gráficos interactivos (choropleth, scatter, bar, radar, lines)
-* **Pandas** — transformação e filtragem de dados
-* **World Bank Open Data** — fonte dos dados económicos
+* **Streamlit** interface e navegação
+* **Plotly**  gráficos interactivos (choropleth, scatter, bar, radar, lines)
+* **Pandas**  transformação e filtragem de dados
+* **World Bank Open Data**  fonte dos dados económicos
 
 ---
 
@@ -107,10 +107,9 @@ Cobertura: 30 países africanos · 2000, 2006, 2009, 2010, 2014, 2015, 2019, 202
 
 ## Autor
 
-**Margarida**— Data Analist & Social Project Manager
+**Margarida**Data Analist & Social Project Manager
 
 Luanda, Angola · [LinkedIn](www.linkedin.com/in/margarida-baltazar) · [GitHub](https://github.com/PrisTheAnalyst)
 
----
 
 *Projecto académico e de portfólio. Dados para fins analíticos e educativos.*
