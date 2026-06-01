@@ -1,0 +1,331 @@
+﻿País;Código_ISO3;Região;Ano;Era_Económica;Ordem_Era;PIB_USD_Bilhões;PIB_por_Habitante_USD;Crescimento_PIB_%;Crescimento_vs_2000_%;Cor_Linha
+Nigéria;NGA;Ocidental;2000;Início das Séries;1;170,7;1419;5,0;0,0;Outros
+Nigéria;NGA;Ocidental;2006;Boom das Matérias-Primas;2;236,0;1611;6,2;38,3;Outros
+Nigéria;NGA;Ocidental;2009;Crise Financeira Global;3;297,3;1794;6,9;74,2;Outros
+Nigéria;NGA;Ocidental;2010;Expansão Pós-Crise;4;369,1;2327;24,2;116,2;Outros
+Nigéria;NGA;Ocidental;2014;Africa Rising;5;568,5;3040;6,3;233,0;Outros
+Nigéria;NGA;Ocidental;2015;Choques e Ajustamentos;6;481,1;2646;-15,4;181,8;Outros
+Nigéria;NGA;Ocidental;2019;Pré-COVID;7;448,1;2229;2,2;162,5;Outros
+Nigéria;NGA;Ocidental;2020;Pandemia COVID-19;8;432,3;2098;-1,8;153,3;Outros
+Nigéria;NGA;Ocidental;2021;Recuperação Inicial;9;440,8;2079;3,4;158,2;Outros
+Nigéria;NGA;Ocidental;2022;Recuperação Consolidada;10;477,4;2184;3,3;179,7;Outros
+Nigéria;NGA;Ocidental;2023;Recuperação Pós-COVID;11;497,0;2219;2,9;191,2;Outros
+África do Sul;ZAF;Austral;2000;Início das Séries;1;136,4;2893;4,2;0,0;Outros
+África do Sul;ZAF;Austral;2006;Boom das Matérias-Primas;2;271,8;5646;5,6;99,3;Outros
+África do Sul;ZAF;Austral;2009;Crise Financeira Global;3;295,8;5924;-1,5;116,9;Outros
+África do Sul;ZAF;Austral;2010;Expansão Pós-Crise;4;375,3;7491;26,9;175,1;Outros
+África do Sul;ZAF;Austral;2014;Africa Rising;5;381,3;7400;1,8;179,5;Outros
+África do Sul;ZAF;Austral;2015;Choques e Ajustamentos;6;317,6;5733;-16,7;132,8;Outros
+África do Sul;ZAF;Austral;2019;Pré-COVID;7;351,4;5885;0,3;157,6;Outros
+África do Sul;ZAF;Austral;2020;Pandemia COVID-19;8;301,9;5091;-6,4;121,3;Outros
+África do Sul;ZAF;Austral;2021;Recuperação Inicial;9;419,0;7030;4,9;207,2;Outros
+África do Sul;ZAF;Austral;2022;Recuperação Consolidada;10;405,9;6776;1,9;197,6;Outros
+África do Sul;ZAF;Austral;2023;Recuperação Pós-COVID;11;377,8;6213;0,7;177,0;Outros
+Egipto;EGY;Norte;2000;Início das Séries;1;107,5;1565;5,4;0,0;Outros
+Egipto;EGY;Norte;2006;Boom das Matérias-Primas;2;107,4;1483;7,1;-0,1;Outros
+Egipto;EGY;Norte;2009;Crise Financeira Global;3;188,9;2384;4,7;75,7;Outros
+Egipto;EGY;Norte;2010;Expansão Pós-Crise;4;218,9;2591;15,9;103,6;Outros
+Egipto;EGY;Norte;2014;Africa Rising;5;305,0;3560;2,9;183,7;Outros
+Egipto;EGY;Norte;2015;Choques e Ajustamentos;6;332,3;3620;9,0;209,1;Outros
+Egipto;EGY;Norte;2019;Pré-COVID;7;303,1;3026;5,5;182,0;Outros
+Egipto;EGY;Norte;2020;Pandemia COVID-19;8;363,1;3549;3,6;237,8;Outros
+Egipto;EGY;Norte;2021;Recuperação Inicial;9;424,7;4072;3,3;295,1;Outros
+Egipto;EGY;Norte;2022;Recuperação Consolidada;10;476,7;3019;6,6;343,4;Outros
+Egipto;EGY;Norte;2023;Recuperação Pós-COVID;11;347,6;3491;3,8;223,3;Outros
+Argélia;DZA;Norte;2000;Início das Séries;1;54,7;1811;2,2;0,0;Outros
+Argélia;DZA;Norte;2006;Boom das Matérias-Primas;2;117,0;3510;2,0;113,9;Outros
+Argélia;DZA;Norte;2009;Crise Financeira Global;3;137,2;3961;1,6;150,8;Outros
+Argélia;DZA;Norte;2010;Expansão Pós-Crise;4;161,2;4429;17,5;194,7;Outros
+Argélia;DZA;Norte;2014;Africa Rising;5;214,1;5420;3,8;291,4;Outros
+Argélia;DZA;Norte;2015;Choques e Ajustamentos;6;166,8;4223;-22,1;204,9;Outros
+Argélia;DZA;Norte;2019;Pré-COVID;7;169,9;3935;0,9;210,6;Outros
+Argélia;DZA;Norte;2020;Pandemia COVID-19;8;145,0;3303;-4,9;165,1;Outros
+Argélia;DZA;Norte;2021;Recuperação Inicial;9;167,7;3777;3,4;206,6;Outros
+Argélia;DZA;Norte;2022;Recuperação Consolidada;10;191,9;3340;3,2;250,8;Outros
+Argélia;DZA;Norte;2023;Recuperação Pós-COVID;11;238,8;4098;4,1;336,6;Outros
+Angola;AGO;Central;2000;Início das Séries;1;9,1;669;3,0;0,0;Angola
+Angola;AGO;Central;2006;Boom das Matérias-Primas;2;60,9;4040;18,6;569,2;Angola
+Angola;AGO;Central;2009;Crise Financeira Global;3;75,5;4520;2,4;729,7;Angola
+Angola;AGO;Central;2010;Expansão Pós-Crise;4;83,8;4276;11,0;820,9;Angola
+Angola;AGO;Central;2014;Africa Rising;5;131,4;5180;4,8;1344,0;Angola
+Angola;AGO;Central;2015;Choques e Ajustamentos;6;102,6;3651;-21,9;1027,5;Angola
+Angola;AGO;Central;2019;Pré-COVID;7;88,8;2361;-0,7;875,8;Angola
+Angola;AGO;Central;2020;Pandemia COVID-19;8;53,5;1626;-5,4;487,9;Angola
+Angola;AGO;Central;2021;Recuperação Inicial;9;75,0;2199;1,2;724,2;Angola
+Angola;AGO;Central;2022;Recuperação Consolidada;10;124,2;4248;3,0;1264,8;Angola
+Angola;AGO;Central;2023;Recuperação Pós-COVID;11;84,7;2757;-0,3;830,8;Angola
+Etiópia;ETH;Oriental;2000;Início das Séries;1;8,2;116;5,2;0,0;Outros
+Etiópia;ETH;Oriental;2006;Boom das Matérias-Primas;2;16,6;210;11,5;102,4;Outros
+Etiópia;ETH;Oriental;2009;Crise Financeira Global;3;32,4;378;10,0;295,1;Outros
+Etiópia;ETH;Oriental;2010;Expansão Pós-Crise;4;29,7;341;-8,3;262,2;Outros
+Etiópia;ETH;Oriental;2014;Africa Rising;5;55,6;598;10,3;578,0;Outros
+Etiópia;ETH;Oriental;2015;Choques e Ajustamentos;6;64,6;641;16,2;687,8;Outros
+Etiópia;ETH;Oriental;2019;Pré-COVID;7;96,1;902;9,0;1072,0;Outros
+Etiópia;ETH;Oriental;2020;Pandemia COVID-19;8;107,6;913;6,1;1212,2;Outros
+Etiópia;ETH;Oriental;2021;Recuperação Inicial;9;111,3;921;6,3;1257,3;Outros
+Etiópia;ETH;Oriental;2022;Recuperação Consolidada;10;126,8;1135;6,4;1446,3;Outros
+Etiópia;ETH;Oriental;2023;Recuperação Pós-COVID;11;155,8;1359;7,2;1800,0;Outros
+Quénia;KEN;Oriental;2000;Início das Séries;1;12,7;415;0,6;0,0;Outros
+Quénia;KEN;Oriental;2006;Boom das Matérias-Primas;2;25,0;701;6,3;96,9;Outros
+Quénia;KEN;Oriental;2009;Crise Financeira Global;3;29,5;751;3,3;132,3;Outros
+Quénia;KEN;Oriental;2010;Expansão Pós-Crise;4;40,0;988;35,6;215,0;Outros
+Quénia;KEN;Oriental;2014;Africa Rising;5;61,4;1421;5,4;383,5;Outros
+Quénia;KEN;Oriental;2015;Choques e Ajustamentos;6;63,7;1350;3,7;401,6;Outros
+Quénia;KEN;Oriental;2019;Pré-COVID;7;98,8;1958;5,4;678,0;Outros
+Quénia;KEN;Oriental;2020;Pandemia COVID-19;8;98,5;1824;0,0;675,6;Outros
+Quénia;KEN;Oriental;2021;Recuperação Inicial;9;110,3;2043;7,5;768,5;Outros
+Quénia;KEN;Oriental;2022;Recuperação Consolidada;10;113,4;2194;5,5;792,9;Outros
+Quénia;KEN;Oriental;2023;Recuperação Pós-COVID;11;118,1;2204;5,6;829,9;Outros
+Gana;GHA;Ocidental;2000;Início das Séries;1;4,9;245;3,7;0,0;Outros
+Gana;GHA;Ocidental;2006;Boom das Matérias-Primas;2;14,4;621;6,4;193,9;Outros
+Gana;GHA;Ocidental;2009;Crise Financeira Global;3;26,2;1053;4,8;434,7;Outros
+Gana;GHA;Ocidental;2010;Expansão Pós-Crise;4;32,1;1321;22,5;555,1;Outros
+Gana;GHA;Ocidental;2014;Africa Rising;5;38,5;1460;2,9;685,7;Outros
+Gana;GHA;Ocidental;2015;Choques e Ajustamentos;6;37,9;1344;-1,6;673,5;Outros
+Gana;GHA;Ocidental;2019;Pré-COVID;7;66,9;2224;8,1;1265,3;Outros
+Gana;GHA;Ocidental;2020;Pandemia COVID-19;8;68,0;2099;0,5;1287,8;Outros
+Gana;GHA;Ocidental;2021;Recuperação Inicial;9;77,6;2352;5,4;1483,7;Outros
+Gana;GHA;Ocidental;2022;Recuperação Consolidada;10;73,0;2263;3,2;1389,8;Outros
+Gana;GHA;Ocidental;2023;Recuperação Pós-COVID;11;76,4;2300;2,3;1459,2;Outros
+Tanzânia;TZA;Oriental;2000;Início das Séries;1;10,0;276;4,2;0,0;Outros
+Tanzânia;TZA;Oriental;2006;Boom das Matérias-Primas;2;14,8;369;6,7;48,0;Outros
+Tanzânia;TZA;Oriental;2009;Crise Financeira Global;3;20,6;490;5,4;106,0;Outros
+Tanzânia;TZA;Oriental;2010;Expansão Pós-Crise;4;31,0;692;50,5;210,0;Outros
+Tanzânia;TZA;Oriental;2014;Africa Rising;5;48,1;993;7,0;381,0;Outros
+Tanzânia;TZA;Oriental;2015;Choques e Ajustamentos;6;45,6;852;-5,2;356,0;Outros
+Tanzânia;TZA;Oriental;2019;Pré-COVID;7;62,2;1145;7,0;522,0;Outros
+Tanzânia;TZA;Oriental;2020;Pandemia COVID-19;8;63,0;1055;-0,3;530,0;Outros
+Tanzânia;TZA;Oriental;2021;Recuperação Inicial;9;67,8;1099;4,9;578,0;Outros
+Tanzânia;TZA;Oriental;2022;Recuperação Consolidada;10;75,5;1175;4,7;655,0;Outros
+Tanzânia;TZA;Oriental;2023;Recuperação Pós-COVID;11;79,2;1198;5,4;692,0;Outros
+Marrocos;MAR;Norte;2000;Início das Séries;1;37,0;1318;1,6;0,0;Outros
+Marrocos;MAR;Norte;2006;Boom das Matérias-Primas;2;65,6;2148;7,8;77,3;Outros
+Marrocos;MAR;Norte;2009;Crise Financeira Global;3;88,9;2840;4,8;140,3;Outros
+Marrocos;MAR;Norte;2010;Expansão Pós-Crise;4;90,8;2838;2,1;145,4;Outros
+Marrocos;MAR;Norte;2014;Africa Rising;5;109,0;3148;2,6;194,6;Outros
+Marrocos;MAR;Norte;2015;Choques e Ajustamentos;6;101,3;2945;-7,1;173,8;Outros
+Marrocos;MAR;Norte;2019;Pré-COVID;7;119,7;3338;2,9;223,5;Outros
+Marrocos;MAR;Norte;2020;Pandemia COVID-19;8;114,7;3108;-7,2;210,0;Outros
+Marrocos;MAR;Norte;2021;Recuperação Inicial;9;132,7;3558;7,9;258,6;Outros
+Marrocos;MAR;Norte;2022;Recuperação Consolidada;10;142,9;4165;7,9;286,2;Outros
+Marrocos;MAR;Norte;2023;Recuperação Pós-COVID;11;145,4;4112;3,4;293,0;Outros
+Costa do Marfim;CIV;Ocidental;2000;Início das Séries;1;10,6;643;-2,3;0,0;Outros
+Costa do Marfim;CIV;Ocidental;2006;Boom das Matérias-Primas;2;16,5;836;1,5;55,7;Outros
+Costa do Marfim;CIV;Ocidental;2009;Crise Financeira Global;3;23,6;1116;3,8;122,6;Outros
+Costa do Marfim;CIV;Ocidental;2010;Expansão Pós-Crise;4;24,4;1232;3,4;130,2;Outros
+Costa do Marfim;CIV;Ocidental;2014;Africa Rising;5;40,3;1713;8,8;280,2;Outros
+Costa do Marfim;CIV;Ocidental;2015;Choques e Ajustamentos;6;36,9;1591;-8,4;248,1;Outros
+Costa do Marfim;CIV;Ocidental;2019;Pré-COVID;7;58,5;2290;6,9;451,9;Outros
+Costa do Marfim;CIV;Ocidental;2020;Pandemia COVID-19;8;61,4;2326;2,0;479,2;Outros
+Costa do Marfim;CIV;Ocidental;2021;Recuperação Inicial;9;70,5;2621;7,0;565,1;Outros
+Costa do Marfim;CIV;Ocidental;2022;Recuperação Consolidada;10;70,0;2617;6,7;560,4;Outros
+Costa do Marfim;CIV;Ocidental;2023;Recuperação Pós-COVID;11;78,8;2901;6,6;643,4;Outros
+Camarões;CMR;Central;2000;Início das Séries;1;9,5;601;4,2;0,0;Outros
+Camarões;CMR;Central;2006;Boom das Matérias-Primas;2;18,3;1006;3,2;92,6;Outros
+Camarões;CMR;Central;2009;Crise Financeira Global;3;23,3;1197;1,9;145,3;Outros
+Camarões;CMR;Central;2010;Expansão Pós-Crise;4;25,4;1296;9,0;167,4;Outros
+Camarões;CMR;Central;2014;Africa Rising;5;32,7;1375;5,9;244,2;Outros
+Camarões;CMR;Central;2015;Choques e Ajustamentos;6;29,2;1253;-10,7;207,4;Outros
+Camarões;CMR;Central;2019;Pré-COVID;7;39,0;1512;3,6;310,5;Outros
+Camarões;CMR;Central;2020;Pandemia COVID-19;8;40,5;1528;0,5;326,3;Outros
+Camarões;CMR;Central;2021;Recuperação Inicial;9;43,4;1596;3,5;356,8;Outros
+Camarões;CMR;Central;2022;Recuperação Consolidada;10;44,0;1594;3,4;363,2;Outros
+Camarões;CMR;Central;2023;Recuperação Pós-COVID;11;47,3;1681;3,8;397,9;Outros
+Uganda;UGA;Oriental;2000;Início das Séries;1;5,0;190;3,1;0,0;Outros
+Uganda;UGA;Oriental;2006;Boom das Matérias-Primas;2;9,3;310;10,8;86,0;Outros
+Uganda;UGA;Oriental;2009;Crise Financeira Global;3;14,7;451;8,1;194,0;Outros
+Uganda;UGA;Oriental;2010;Expansão Pós-Crise;4;17,0;520;15,6;240,0;Outros
+Uganda;UGA;Oriental;2014;Africa Rising;5;27,8;772;4,6;456,0;Outros
+Uganda;UGA;Oriental;2015;Choques e Ajustamentos;6;25,5;654;-8,3;410,0;Outros
+Uganda;UGA;Oriental;2019;Pré-COVID;7;35,2;797;8,0;604,0;Outros
+Uganda;UGA;Oriental;2020;Pandemia COVID-19;8;37,7;825;2,7;654,0;Outros
+Uganda;UGA;Oriental;2021;Recuperação Inicial;9;40,5;860;5,9;710,0;Outros
+Uganda;UGA;Oriental;2022;Recuperação Consolidada;10;45,6;939;6,0;812,0;Outros
+Uganda;UGA;Oriental;2023;Recuperação Pós-COVID;11;49,3;993;5,3;886,0;Outros
+RD Congo;COD;Central;2000;Início das Séries;1;8,6;148;-6,9;0,0;Outros
+RD Congo;COD;Central;2006;Boom das Matérias-Primas;2;12,8;202;5,6;48,8;Outros
+RD Congo;COD;Central;2009;Crise Financeira Global;3;11,1;158;2,9;29,1;Outros
+RD Congo;COD;Central;2010;Expansão Pós-Crise;4;20,6;313;85,6;139,5;Outros
+RD Congo;COD;Central;2014;Africa Rising;5;37,0;489;9,5;330,2;Outros
+RD Congo;COD;Central;2015;Choques e Ajustamentos;6;35,7;454;-3,5;315,1;Outros
+RD Congo;COD;Central;2019;Pré-COVID;7;47,1;567;4,4;447,7;Outros
+RD Congo;COD;Central;2020;Pandemia COVID-19;8;46,1;515;1,7;436,0;Outros
+RD Congo;COD;Central;2021;Recuperação Inicial;9;55,2;587;6,2;541,9;Outros
+RD Congo;COD;Central;2022;Recuperação Consolidada;10;60,8;675;6,6;607,0;Outros
+RD Congo;COD;Central;2023;Recuperação Pós-COVID;11;66,4;717;6,2;672,1;Outros
+Senegal;SEN;Ocidental;2000;Início das Séries;1;4,7;460;3,2;0,0;Outros
+Senegal;SEN;Ocidental;2006;Boom das Matérias-Primas;2;8,2;725;2,5;74,5;Outros
+Senegal;SEN;Ocidental;2009;Crise Financeira Global;3;11,3;934;2,4;140,4;Outros
+Senegal;SEN;Ocidental;2010;Expansão Pós-Crise;4;12,8;1024;13,3;172,3;Outros
+Senegal;SEN;Ocidental;2014;Africa Rising;5;16,4;1151;4,3;248,9;Outros
+Senegal;SEN;Ocidental;2015;Choques e Ajustamentos;6;17,7;1188;7,9;276,6;Outros
+Senegal;SEN;Ocidental;2019;Pré-COVID;7;23,6;1449;4,4;402,1;Outros
+Senegal;SEN;Ocidental;2020;Pandemia COVID-19;8;23,5;1391;-0,7;400,0;Outros
+Senegal;SEN;Ocidental;2021;Recuperação Inicial;9;27,6;1605;6,5;487,2;Outros
+Senegal;SEN;Ocidental;2022;Recuperação Consolidada;10;27,5;1649;4,7;485,1;Outros
+Senegal;SEN;Ocidental;2023;Recuperação Pós-COVID;11;31,4;1826;8,3;568,1;Outros
+Tunísia;TUN;Norte;2000;Início das Séries;1;21,5;2166;4,7;0,0;Outros
+Tunísia;TUN;Norte;2006;Boom das Matérias-Primas;2;31,3;2947;5,7;45,6;Outros
+Tunísia;TUN;Norte;2009;Crise Financeira Global;3;44,0;4073;3,1;104,7;Outros
+Tunísia;TUN;Norte;2010;Expansão Pós-Crise;4;44,0;4190;0,0;104,7;Outros
+Tunísia;TUN;Norte;2014;Africa Rising;5;48,5;4336;2,3;125,6;Outros
+Tunísia;TUN;Norte;2015;Choques e Ajustamentos;6;43,2;3857;-10,9;100,9;Outros
+Tunísia;TUN;Norte;2019;Pré-COVID;7;38,8;3344;1,5;80,5;Outros
+Tunísia;TUN;Norte;2020;Pandemia COVID-19;8;39,3;3331;2,2;82,8;Outros
+Tunísia;TUN;Norte;2021;Recuperação Inicial;9;46,9;3941;3,3;118,1;Outros
+Tunísia;TUN;Norte;2022;Recuperação Consolidada;10;46,8;3804;2,4;117,7;Outros
+Tunísia;TUN;Norte;2023;Recuperação Pós-COVID;11;48,4;4009;0,4;125,1;Outros
+Líbia;LBY;Norte;2000;Início das Séries;1;34,1;6490;-27,3;0,0;Outros
+Líbia;LBY;Norte;2006;Boom das Matérias-Primas;2;54,0;8850;5,9;58,4;Outros
+Líbia;LBY;Norte;2009;Crise Financeira Global;3;62,4;10054;-0,7;83,0;Outros
+Líbia;LBY;Norte;2010;Expansão Pós-Crise;4;74,8;11688;19,9;119,4;Outros
+Líbia;LBY;Norte;2014;Africa Rising;5;78,8;12090;-24,0;131,1;Outros
+Líbia;LBY;Norte;2015;Choques e Ajustamentos;6;16,9;2683;-78,6;-50,4;Outros
+Líbia;LBY;Norte;2019;Pré-COVID;7;52,1;7686;13,2;52,8;Outros
+Líbia;LBY;Norte;2020;Pandemia COVID-19;8;31,5;4632;-31,3;-7,6;Outros
+Líbia;LBY;Norte;2021;Recuperação Inicial;9;27,5;4044;-31,2;-19,4;Outros
+Líbia;LBY;Norte;2022;Recuperação Consolidada;10;83,9;11591;17,9;146,0;Outros
+Líbia;LBY;Norte;2023;Recuperação Pós-COVID;11;49,3;6788;-12,0;44,6;Outros
+Zâmbia;ZMB;Austral;2000;Início das Séries;1;3,7;346;3,6;0,0;Outros
+Zâmbia;ZMB;Austral;2006;Boom das Matérias-Primas;2;11,4;930;7,9;208,1;Outros
+Zâmbia;ZMB;Austral;2009;Crise Financeira Global;3;12,4;935;9,2;235,1;Outros
+Zâmbia;ZMB;Austral;2010;Expansão Pós-Crise;4;16,2;1237;30,6;337,8;Outros
+Zâmbia;ZMB;Austral;2014;Africa Rising;5;27,1;1682;4,7;632,4;Outros
+Zâmbia;ZMB;Austral;2015;Choques e Ajustamentos;6;21,2;1309;-21,8;473,0;Outros
+Zâmbia;ZMB;Austral;2019;Pré-COVID;7;23,1;1278;1,4;524,3;Outros
+Zâmbia;ZMB;Austral;2020;Pandemia COVID-19;8;18,1;984;-2,8;389,2;Outros
+Zâmbia;ZMB;Austral;2021;Recuperação Inicial;9;22,2;1175;3,6;500,0;Outros
+Zâmbia;ZMB;Austral;2022;Recuperação Consolidada;10;29,4;1680;4,7;694,6;Outros
+Zâmbia;ZMB;Austral;2023;Recuperação Pós-COVID;11;30,9;1695;4,5;735,1;Outros
+Moçambique;MOZ;Oriental;2000;Início das Séries;1;4,1;220;1,9;0,0;Outros
+Moçambique;MOZ;Oriental;2006;Boom das Matérias-Primas;2;7,2;358;8,7;75,6;Outros
+Moçambique;MOZ;Oriental;2009;Crise Financeira Global;3;9,9;404;6,3;141,5;Outros
+Moçambique;MOZ;Oriental;2010;Expansão Pós-Crise;4;9,6;410;-3,0;134,1;Outros
+Moçambique;MOZ;Oriental;2014;Africa Rising;5;15,7;563;7,4;282,9;Outros
+Moçambique;MOZ;Oriental;2015;Choques e Ajustamentos;6;14,7;529;-6,4;258,5;Outros
+Moçambique;MOZ;Oriental;2019;Pré-COVID;7;15,3;493;1,8;273,2;Outros
+Moçambique;MOZ;Oriental;2020;Pandemia COVID-19;8;14,0;447;-1,2;241,5;Outros
+Moçambique;MOZ;Oriental;2021;Recuperação Inicial;9;15,3;478;2,3;273,2;Outros
+Moçambique;MOZ;Oriental;2022;Recuperação Consolidada;10;16,8;516;4,2;309,8;Outros
+Moçambique;MOZ;Oriental;2023;Recuperação Pós-COVID;11;20,9;591;5,6;409,8;Outros
+Ruanda;RWA;Oriental;2000;Início das Séries;1;1,7;212;8,1;0,0;Outros
+Ruanda;RWA;Oriental;2006;Boom das Matérias-Primas;2;3,2;382;9,2;88,2;Outros
+Ruanda;RWA;Oriental;2009;Crise Financeira Global;3;5,2;565;6,3;205,9;Outros
+Ruanda;RWA;Oriental;2010;Expansão Pós-Crise;4;5,6;544;7,7;229,4;Outros
+Ruanda;RWA;Oriental;2014;Africa Rising;5;8,2;795;7,6;382,4;Outros
+Ruanda;RWA;Oriental;2015;Choques e Ajustamentos;6;8,9;748;8,5;423,5;Outros
+Ruanda;RWA;Oriental;2019;Pré-COVID;7;10,4;864;9,4;511,8;Outros
+Ruanda;RWA;Oriental;2020;Pandemia COVID-19;8;10,3;774;-3,4;505,9;Outros
+Ruanda;RWA;Oriental;2021;Recuperação Inicial;9;11,1;816;10,9;552,9;Outros
+Ruanda;RWA;Oriental;2022;Recuperação Consolidada;10;13,3;1034;8,2;682,4;Outros
+Ruanda;RWA;Oriental;2023;Recuperação Pós-COVID;11;14,1;1096;8,2;729,4;Outros
+Gabão;GAB;Central;2000;Início das Séries;1;5,0;4282;-1,9;0,0;Outros
+Gabão;GAB;Central;2006;Boom das Matérias-Primas;2;9,7;6760;1,3;94,0;Outros
+Gabão;GAB;Central;2009;Crise Financeira Global;3;12,1;7720;-2,3;142,0;Outros
+Gabão;GAB;Central;2010;Expansão Pós-Crise;4;14,4;9000;19,0;188,0;Outros
+Gabão;GAB;Central;2014;Africa Rising;5;18,3;10880;4,3;266,0;Outros
+Gabão;GAB;Central;2015;Choques e Ajustamentos;6;14,2;7100;-22,4;184,0;Outros
+Gabão;GAB;Central;2019;Pré-COVID;7;16,7;7430;3,9;234,0;Outros
+Gabão;GAB;Central;2020;Pandemia COVID-19;8;15,1;6864;-1,8;202,0;Outros
+Gabão;GAB;Central;2021;Recuperação Inicial;9;17,0;7391;1,5;240,0;Outros
+Gabão;GAB;Central;2022;Recuperação Consolidada;10;20,5;9720;2,9;310,0;Outros
+Gabão;GAB;Central;2023;Recuperação Pós-COVID;11;19,8;9340;1,3;296,0;Outros
+Botsuana;BWA;Austral;2000;Início das Séries;1;5,9;3461;2,3;0,0;Outros
+Botsuana;BWA;Austral;2006;Boom das Matérias-Primas;2;11,1;6240;5,1;88,1;Outros
+Botsuana;BWA;Austral;2009;Crise Financeira Global;3;11,5;6183;-7,8;94,9;Outros
+Botsuana;BWA;Austral;2010;Expansão Pós-Crise;4;12,8;6400;11,3;116,9;Outros
+Botsuana;BWA;Austral;2014;Africa Rising;5;15,7;7890;4,1;166,1;Outros
+Botsuana;BWA;Austral;2015;Choques e Ajustamentos;6;14,0;6087;-10,8;137,3;Outros
+Botsuana;BWA;Austral;2019;Pré-COVID;7;18,6;8170;3,0;215,3;Outros
+Botsuana;BWA;Austral;2020;Pandemia COVID-19;8;15,7;6038;-8,7;166,1;Outros
+Botsuana;BWA;Austral;2021;Recuperação Inicial;9;18,2;7000;11,4;208,5;Outros
+Botsuana;BWA;Austral;2022;Recuperação Consolidada;10;19,6;7738;4,3;232,2;Outros
+Botsuana;BWA;Austral;2023;Recuperação Pós-COVID;11;20,6;7981;2,7;249,2;Outros
+Maurícias;MUS;Austral;2000;Início das Séries;1;4,7;3904;9,0;0,0;Outros
+Maurícias;MUS;Austral;2006;Boom das Matérias-Primas;2;6,6;5361;3,8;40,4;Outros
+Maurícias;MUS;Austral;2009;Crise Financeira Global;3;8,9;6942;-1,2;89,4;Outros
+Maurícias;MUS;Austral;2010;Expansão Pós-Crise;4;9,9;8250;11,2;110,6;Outros
+Maurícias;MUS;Austral;2014;Africa Rising;5;13,2;10120;3,7;180,9;Outros
+Maurícias;MUS;Austral;2015;Choques e Ajustamentos;6;12,1;9308;-8,3;157,4;Outros
+Maurícias;MUS;Austral;2019;Pré-COVID;7;14,0;11000;3,0;197,9;Outros
+Maurícias;MUS;Austral;2020;Pandemia COVID-19;8;11,4;8769;-14,9;142,6;Outros
+Maurícias;MUS;Austral;2021;Recuperação Inicial;9;12,9;9923;3,3;174,5;Outros
+Maurícias;MUS;Austral;2022;Recuperação Consolidada;10;14,2;12110;6,8;202,1;Outros
+Maurícias;MUS;Austral;2023;Recuperação Pós-COVID;11;15,3;13200;7,0;225,5;Outros
+Namíbia;NAM;Austral;2000;Início das Séries;1;4,0;2074;3,5;0,0;Outros
+Namíbia;NAM;Austral;2006;Boom das Matérias-Primas;2;7,9;3879;7,1;97,5;Outros
+Namíbia;NAM;Austral;2009;Crise Financeira Global;3;9,6;4476;-1,0;140,0;Outros
+Namíbia;NAM;Austral;2010;Expansão Pós-Crise;4;11,3;5136;17,7;182,5;Outros
+Namíbia;NAM;Austral;2014;Africa Rising;5;13,8;5440;6,5;245,0;Outros
+Namíbia;NAM;Austral;2015;Choques e Ajustamentos;6;11,9;4958;-13,8;197,5;Outros
+Namíbia;NAM;Austral;2019;Pré-COVID;7;12,3;5040;1,3;207,5;Outros
+Namíbia;NAM;Austral;2020;Pandemia COVID-19;8;10,5;4200;-8,0;162,5;Outros
+Namíbia;NAM;Austral;2021;Recuperação Inicial;9;12,0;4615;3,1;200,0;Outros
+Namíbia;NAM;Austral;2022;Recuperação Consolidada;10;13,3;5120;4,6;232,5;Outros
+Namíbia;NAM;Austral;2023;Recuperação Pós-COVID;11;12,1;4891;-0,8;202,5;Outros
+Madagáscar;MDG;Oriental;2000;Início das Séries;1;3,8;267;4,7;0,0;Outros
+Madagáscar;MDG;Oriental;2006;Boom das Matérias-Primas;2;6,0;309;5,0;57,9;Outros
+Madagáscar;MDG;Oriental;2009;Crise Financeira Global;3;8,6;400;-3,5;126,3;Outros
+Madagáscar;MDG;Oriental;2010;Expansão Pós-Crise;4;8,7;420;1,2;128,9;Outros
+Madagáscar;MDG;Oriental;2014;Africa Rising;5;11,4;471;3,3;200,0;Outros
+Madagáscar;MDG;Oriental;2015;Choques e Ajustamentos;6;9,8;405;-14,0;157,9;Outros
+Madagáscar;MDG;Oriental;2019;Pré-COVID;7;14,1;497;4,4;271,1;Outros
+Madagáscar;MDG;Oriental;2020;Pandemia COVID-19;8;13,0;469;-4,2;242,1;Outros
+Madagáscar;MDG;Oriental;2021;Recuperação Inicial;9;14,8;523;5,7;289,5;Outros
+Madagáscar;MDG;Oriental;2022;Recuperação Consolidada;10;15,1;558;3,8;297,4;Outros
+Madagáscar;MDG;Oriental;2023;Recuperação Pós-COVID;11;16,0;581;4,0;321,1;Outros
+Mali;MLI;Ocidental;2000;Início das Séries;1;2,7;234;2,6;0,0;Outros
+Mali;MLI;Ocidental;2006;Boom das Matérias-Primas;2;5,7;450;5,3;111,1;Outros
+Mali;MLI;Ocidental;2009;Crise Financeira Global;3;9,1;671;4,6;237,0;Outros
+Mali;MLI;Ocidental;2010;Expansão Pós-Crise;4;10,0;649;9,9;270,4;Outros
+Mali;MLI;Ocidental;2014;Africa Rising;5;12,9;785;7,2;377,8;Outros
+Mali;MLI;Ocidental;2015;Choques e Ajustamentos;6;12,8;707;-0,8;374,1;Outros
+Mali;MLI;Ocidental;2019;Pré-COVID;7;17,3;901;5,0;540,7;Outros
+Mali;MLI;Ocidental;2020;Pandemia COVID-19;8;15,3;712;-1,2;466,7;Outros
+Mali;MLI;Ocidental;2021;Recuperação Inicial;9;17,6;800;3,1;551,9;Outros
+Mali;MLI;Ocidental;2022;Recuperação Consolidada;10;19,1;1039;1,9;607,4;Outros
+Mali;MLI;Ocidental;2023;Recuperação Pós-COVID;11;22,4;1190;3,7;729,6;Outros
+Burkina Faso;BFA;Ocidental;2000;Início das Séries;1;2,4;199;2,7;0,0;Outros
+Burkina Faso;BFA;Ocidental;2006;Boom das Matérias-Primas;2;5,2;386;5,5;116,7;Outros
+Burkina Faso;BFA;Ocidental;2009;Crise Financeira Global;3;8,2;551;3,0;241,7;Outros
+Burkina Faso;BFA;Ocidental;2010;Expansão Pós-Crise;4;8,4;553;2,4;250,0;Outros
+Burkina Faso;BFA;Ocidental;2014;Africa Rising;5;12,6;713;4,0;425,0;Outros
+Burkina Faso;BFA;Ocidental;2015;Choques e Ajustamentos;6;11,2;619;-11,1;366,7;Outros
+Burkina Faso;BFA;Ocidental;2019;Pré-COVID;7;15,7;775;5,7;554,2;Outros
+Burkina Faso;BFA;Ocidental;2020;Pandemia COVID-19;8;15,7;730;-1,9;554,2;Outros
+Burkina Faso;BFA;Ocidental;2021;Recuperação Inicial;9;17,9;821;6,9;645,8;Outros
+Burkina Faso;BFA;Ocidental;2022;Recuperação Consolidada;10;19,7;913;1,5;720,8;Outros
+Burkina Faso;BFA;Ocidental;2023;Recuperação Pós-COVID;11;20,7;945;3,2;762,5;Outros
+Níger;NER;Ocidental;2000;Início das Séries;1;2,2;183;-0,4;0,0;Outros
+Níger;NER;Ocidental;2006;Boom das Matérias-Primas;2;3,8;275;5,8;72,7;Outros
+Níger;NER;Ocidental;2009;Crise Financeira Global;3;5,4;339;-0,7;145,5;Outros
+Níger;NER;Ocidental;2010;Expansão Pós-Crise;4;5,7;354;5,6;159,1;Outros
+Níger;NER;Ocidental;2014;Africa Rising;5;8,2;488;7,5;272,7;Outros
+Níger;NER;Ocidental;2015;Choques e Ajustamentos;6;8,2;410;0,0;272,7;Outros
+Níger;NER;Ocidental;2019;Pré-COVID;7;12,9;575;5,8;486,4;Outros
+Níger;NER;Ocidental;2020;Pandemia COVID-19;8;13,7;566;-2,4;522,7;Outros
+Níger;NER;Ocidental;2021;Recuperação Inicial;9;14,2;570;1,4;545,5;Outros
+Níger;NER;Ocidental;2022;Recuperação Consolidada;10;15,5;648;7,3;604,5;Outros
+Níger;NER;Ocidental;2023;Recuperação Pós-COVID;11;16,8;685;3,0;663,6;Outros
+Sudão;SDN;Norte;2000;Início das Séries;1;12,6;392;1,8;0,0;Outros
+Sudão;SDN;Norte;2006;Boom das Matérias-Primas;2;43,9;1118;11,3;248,4;Outros
+Sudão;SDN;Norte;2009;Crise Financeira Global;3;50,3;1176;3,9;299,2;Outros
+Sudão;SDN;Norte;2010;Expansão Pós-Crise;4;65,6;1913;30,4;420,6;Outros
+Sudão;SDN;Norte;2014;Africa Rising;5;75,5;1840;-2,7;499,2;Outros
+Sudão;SDN;Norte;2015;Choques e Ajustamentos;6;97,2;2499;28,7;671,4;Outros
+Sudão;SDN;Norte;2019;Pré-COVID;7;30,9;671;-2,5;145,2;Outros
+Sudão;SDN;Norte;2020;Pandemia COVID-19;8;30,5;696;-3,6;142,1;Outros
+Sudão;SDN;Norte;2021;Recuperação Inicial;9;36,4;804;0,5;188,9;Outros
+Sudão;SDN;Norte;2022;Recuperação Consolidada;10;40,8;771;0,4;223,8;Outros
+Sudão;SDN;Norte;2023;Recuperação Pós-COVID;11;37,5;688;-0,8;197,6;Outros
+Zimbabué;ZWE;Austral;2000;Início das Séries;1;6,8;549;-7,3;0,0;Outros
+Zimbabué;ZWE;Austral;2006;Boom das Matérias-Primas;2;5,6;434;-3,6;-17,6;Outros
+Zimbabué;ZWE;Austral;2009;Crise Financeira Global;3;8,1;618;8,2;19,1;Outros
+Zimbabué;ZWE;Austral;2010;Expansão Pós-Crise;4;7,5;573;-7,4;10,3;Outros
+Zimbabué;ZWE;Austral;2014;Africa Rising;5;13,8;1043;3,8;102,9;Outros
+Zimbabué;ZWE;Austral;2015;Choques e Ajustamentos;6;14,2;1000;2,9;108,8;Outros
+Zimbabué;ZWE;Austral;2019;Pré-COVID;7;21,4;1504;-6,5;214,7;Outros
+Zimbabué;ZWE;Austral;2020;Pandemia COVID-19;8;19,7;1322;-6,2;189,7;Outros
+Zimbabué;ZWE;Austral;2021;Recuperação Inicial;9;22,0;1457;8,2;223,5;Outros
+Zimbabué;ZWE;Austral;2022;Recuperação Consolidada;10;26,6;1674;6,5;291,2;Outros
+Zimbabué;ZWE;Austral;2023;Recuperação Pós-COVID;11;26,3;1617;3,3;286,8;Outros
