@@ -34,29 +34,18 @@ html, body, [data-testid="stApp"] {
     font-family: 'Inter', sans-serif;
 }
 
-/* Esconde apenas elementos decorativos */
+/* Esconde elementos decorativos mas mantém botões de navegação da sidebar */
 #MainMenu, footer,
-[data-testid="stDecoration"] { display:none !important; }
+[data-testid="stDecoration"],
+[data-testid="stToolbar"] { display:none !important; }
 
-/* Mantém o header visível para que o botão de reabrir sidebar funcione */
-header { visibility: hidden !important; height: 0 !important; }
-header * { visibility: hidden !important; }
-
-/* Botão de reabrir sidebar — sempre visível e clicável */
-[data-testid="stSidebarCollapseButton"],
-[data-testid="stSidebarOpenButton"],
-button[kind="header"] {
-    visibility: visible !important;
-    display: flex !important;
-    opacity: 1 !important;
-    pointer-events: all !important;
+/* Garante que o botão de colapso da sidebar é clicável */
+[data-testid="stSidebarCollapseButton"] button {
     background: #0A0A16 !important;
     border: 1px solid #1E1E32 !important;
     color: #8A8090 !important;
-    z-index: 9999 !important;
 }
-[data-testid="stSidebarCollapseButton"]:hover,
-[data-testid="stSidebarOpenButton"]:hover {
+[data-testid="stSidebarCollapseButton"] button:hover {
     background: #1E1E32 !important;
     color: #F5F0E8 !important;
 }
