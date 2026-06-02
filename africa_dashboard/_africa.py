@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
-from components import kpi, insight, section, fig_base, add_vline, add_era_highlight
+from components import kpi, insight, section, fig_base, add_vline, add_era_highlight, chart_height
 from config import (ANGOLA, BLUE, BLUE_L, GREEN, GREEN_L, RED, GOLD,
                     WHITE, MUTED, MUTED_L, BG, CARD, CARD_L, GRID, BORDER, CORES_LINHA)
 
@@ -45,7 +45,6 @@ def render(p, s, r, m):
     if filtro_reg  != "Todas": pf = pf[pf["Região"]           == filtro_reg]
     if filtro_perf != "Todos": pf = pf[pf["Perfil_Económico"] == filtro_perf]
 
-    # ── Guard: sem resultados ─────────────────────────────────────────────────
     if pf.empty:
         section("Indicadores Chave", badge="0 países")
         _empty_state("Nenhum país corresponde à combinação de filtros. Ajuste a Região ou o Perfil Económico.")
@@ -55,7 +54,6 @@ def render(p, s, r, m):
     section("Indicadores Chave", badge=f"{len(pf)} países")
     c1, c2, c3, c4, c5 = st.columns(5)
 
-    # KPIs que dependem de pf calculam localmente para reflectir o filtro
     pib23_f   = pf["PIB_2023_USD_Bilhões"].sum()
     pib00_f   = pf["PIB_2000_USD_Bilhões"].sum()
     cresc_f   = (pib23_f - pib00_f) / pib00_f * 100 if pib00_f else 0
@@ -112,7 +110,7 @@ def render(p, s, r, m):
         showcountries=True, countrycolor=BORDER,
     )
     fig_map.update_layout(
-        paper_bgcolor=BG, height=430, margin=dict(l=0, r=0, t=0, b=0),
+        paper_bgcolor=BG, height=chart_height("map"), margin=dict(l=0, r=0, t=0, b=0),
         coloraxis_colorbar=dict(
             title=dict(text="Crescimento (%)", font=dict(color=MUTED, size=11)),
             tickfont=dict(color=MUTED, size=10), bgcolor=CARD,
@@ -136,7 +134,6 @@ def render(p, s, r, m):
             angola_rank_vals = pf[pf["Código_ISO3"] == "AGO"]["Ranking_PIB_2023"].values
             angola_rank      = int(angola_rank_vals[0]) if len(angola_rank_vals) > 0 else "N/A"
 
-            # Angola pode não estar no top10 filtrado — ajusta o insight
             if angola_rank != "N/A":
                 angola_txt = f"Angola ocupa a posição <strong>#{angola_rank}</strong> no continente."
             else:
@@ -149,7 +146,7 @@ def render(p, s, r, m):
             )
 
             cores = [ANGOLA if x == "AGO" else BLUE for x in top10["Código_ISO3"]]
-            fig2  = fig_base(height=340)
+            fig2  = fig_base(kind="bar_h", n_items=len(top10))
             fig2.add_trace(go.Bar(
                 x=top10["PIB_2023_USD_Bilhões"], y=top10["País"], orientation="h",
                 marker=dict(color=cores, line=dict(width=0)),
@@ -163,15 +160,14 @@ def render(p, s, r, m):
 
     with col4:
         section("PIB por Região: 2000, 2010 e 2023", badge="evolução regional")
-        # O gráfico de regiões usa sempre `r` completo (não é filtrado por país)
         r_ord = r.sort_values("PIB_Total_2023_Bi", ascending=False)
 
         if r_ord.empty:
             _empty_state("Sem dados de regiões disponíveis.")
         else:
-            maior_reg  = r_ord.iloc[0]
+            maior_reg     = r_ord.iloc[0]
             mais_cresc_df = r.nlargest(1, "Crescimento_Acumulado_Região_%")
-            mais_cresc = mais_cresc_df.iloc[0] if not mais_cresc_df.empty else None
+            mais_cresc    = mais_cresc_df.iloc[0] if not mais_cresc_df.empty else None
 
             if mais_cresc is not None:
                 insight(
@@ -182,7 +178,7 @@ def render(p, s, r, m):
             else:
                 insight(f"<strong>{maior_reg['Região']}</strong> domina com ${maior_reg['PIB_Total_2023_Bi']:.0f}B.")
 
-            fig4 = fig_base(height=340)
+            fig4 = fig_base(kind="bar_v")
             for ano_col, cor, nome in [
                 ("PIB_Total_2000_Bi", "#1E2D6A", "2000"),
                 ("PIB_Total_2010_Bi", BLUE,      "2010"),
@@ -208,15 +204,14 @@ def render(p, s, r, m):
             "A faixa laranja indica o período seleccionado no gráfico abaixo."
         )
 
-    # Filtra série temporal pelos países em pf (para respeitar filtros de região/perfil)
     isos_visiveis = pf["Código_ISO3"].unique()
     sf = s[s["Código_ISO3"].isin(isos_visiveis)]
 
     if sf.empty:
         _empty_state("Sem dados de série temporal para os países seleccionados.")
     else:
-        fig3 = fig_base(height=400)
-        add_era_highlight(fig3, filtro_era, s)  # highlights usam `s` completo para as datas
+        fig3 = fig_base(kind="line")
+        add_era_highlight(fig3, filtro_era, s)
 
         for iso in sf["Código_ISO3"].unique():
             df_i  = sf[sf["Código_ISO3"] == iso].sort_values("Ano")
@@ -233,10 +228,10 @@ def render(p, s, r, m):
 
         anos_disponiveis = sorted(int(a) for a in s["Ano"].unique())
         for ano, label, cor in [
-            (2006, "Boom",         GOLD),
-            (2009, "Crise",        RED),
+            (2006, "Boom",          GOLD),
+            (2009, "Crise",         RED),
             (2014, "Africa Rising", GREEN),
-            (2020, "COVID-19",     RED),
+            (2020, "COVID-19",      RED),
         ]:
             if ano in anos_disponiveis:
                 add_vline(fig3, ano, label, cor)
