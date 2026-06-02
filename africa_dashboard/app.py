@@ -21,7 +21,7 @@ st.set_page_config(
     page_title="EcoÁfrica · PIB 2000–2023",
     page_icon=os.path.join(BASE_DIR, "assets", "fundo.png"),
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
 )
 st.markdown(CSS, unsafe_allow_html=True)
 
@@ -44,6 +44,7 @@ with st.sidebar:
         label="pagina",
         options=["Capa", "África", "Angola", "Finanças", "Dicionário", "Extras"],
         label_visibility="collapsed",
+        key="nav_pagina",
     )
 
     st.markdown(
