@@ -34,30 +34,29 @@ html, body, [data-testid="stApp"] {
     font-family: 'Inter', sans-serif;
 }
 
-/* Esconde apenas elementos decorativos — NÃO esconde o toolbar
-   para que o botão de reabrir a sidebar funcione em mobile */
-#MainMenu, footer, header,
+/* Esconde apenas elementos decorativos */
+#MainMenu, footer,
 [data-testid="stDecoration"] { display:none !important; }
 
-/* O botão de colapso/expansão da sidebar fica visível mas discreto */
-[data-testid="stSidebarCollapseButton"] {
-    background: #0A0A16 !important;
-    border: 1px solid #1E1E32 !important;
-    color: #8A8090 !important;
-    border-radius: 0 6px 6px 0 !important;
-}
-[data-testid="stSidebarCollapseButton"]:hover {
-    background: #1E1E32 !important;
-    color: #F5F0E8 !important;
-}
+/* Mantém o header visível para que o botão de reabrir sidebar funcione */
+header { visibility: hidden !important; height: 0 !important; }
+header * { visibility: hidden !important; }
 
-/* Botão de reabrir sidebar quando ela está fechada */
-[data-testid="stSidebarOpenButton"] button {
+/* Botão de reabrir sidebar — sempre visível e clicável */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarOpenButton"],
+button[kind="header"] {
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
     background: #0A0A16 !important;
     border: 1px solid #1E1E32 !important;
     color: #8A8090 !important;
+    z-index: 9999 !important;
 }
-[data-testid="stSidebarOpenButton"] button:hover {
+[data-testid="stSidebarCollapseButton"]:hover,
+[data-testid="stSidebarOpenButton"]:hover {
     background: #1E1E32 !important;
     color: #F5F0E8 !important;
 }
