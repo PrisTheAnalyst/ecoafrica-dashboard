@@ -1,436 +1,246 @@
+import sys
+import os
+import base64
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
+
 import streamlit as st
-import plotly.express as px
 import plotly.graph_objects as go
-import numpy as np
-from components import kpi, insight, section, fig_base, add_vline, add_era_highlight, chart_height
-from config import (ANGOLA, ANGOLA_D, BLUE, BLUE_L, GREEN, GREEN_L, RED, GOLD,
-                    WHITE, MUTED, MUTED_L, CARD, CARD_L, GRID, BORDER,
-                    PEERS, PEERS_N, PEERS_C, TOP5_ISO)
+
+from config import CSS, ANGOLA, BLUE, GOLD, WHITE, MUTED, MUTED_L, BG, CARD, CARD_L, BORDER
+import _africa     as africa
+import _angola     as angola_page
+import financas    as financas_page
+import dicionario  as dicionario_page
+import extras      as extras_page
+from data_loader import load, compute_metrics
 
 
-def _empty_state(msg="Sem dados para os filtros seleccionados."):
+st.set_page_config(
+    page_title="EcoÁfrica · PIB 2000–2023",
+    page_icon=os.path.join(BASE_DIR, "assets", "fundo.png"),
+    layout="wide",
+    initial_sidebar_state="auto",
+)
+st.markdown(CSS, unsafe_allow_html=True)
+
+p, s, r = load()
+m       = compute_metrics(p, s)
+
+
+def img_b64(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+
+with st.sidebar:
+    st.markdown('<div class="nav-brand">EcoÁfrica</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-version">Analista</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-sub" style="margin-top:8px">PIB · 2000 – 2023</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-label">Navegação</div>', unsafe_allow_html=True)
+
+    pagina = st.radio(
+        label="pagina",
+        options=["Capa", "África", "Angola", "Finanças", "Dicionário", "Extras"],
+        label_visibility="collapsed",
+    )
+
     st.markdown(
-        f'<div style="padding:2rem;text-align:center;color:{MUTED};'
-        f'background:#0F0F1A;border:1px dashed #1E1E32;border-radius:12px;'
-        f'margin:1rem 0">{msg}</div>',
+        f'<div style="border-top:1px solid {BORDER};margin:.8rem 0 .4rem;'
+        f'color:{MUTED};font-size:9px;letter-spacing:.1em;text-transform:uppercase">'
+        f'Referência</div>',
         unsafe_allow_html=True,
     )
 
+    st.markdown(f"""
+    <div class="nav-footer">
+        Fonte: World Bank<br>
+        30 países africanos<br>
+        2000 – 2023<br><br>
+        <span style="color:{ANGOLA};font-weight:600">Angola</span> #8 em África<br>
+        <span style="color:#4ADE80;font-weight:600">+831%</span> crescimento acumulado<br>
+        <span style="color:#F87171;font-weight:600">−39,8%</span> impacto COVID
+    </div>
+    """, unsafe_allow_html=True)
 
-def _badge_filtro(filtro_era, filtro_vuln):
-    partes = []
-    if filtro_era  != "Todas": partes.append(f"Era: <strong>{filtro_era}</strong>")
-    if filtro_vuln != "Todos": partes.append(f"Vuln: <strong>{filtro_vuln}</strong>")
-    if not partes:
-        return
-    st.markdown(
-        f'<div style="display:inline-flex;gap:8px;align-items:center;'
-        f'background:#1A0F00;border:1px solid {ANGOLA}44;border-radius:8px;'
-        f'padding:5px 12px;font-size:11px;color:{MUTED};margin-bottom:.8rem">'
-        f'<span style="color:{ANGOLA};font-weight:700">Filtros activos</span>'
-        f'&nbsp;·&nbsp;' + "&nbsp;·&nbsp;".join(partes) +
-        f'</div>',
-        unsafe_allow_html=True,
+
+if pagina == "Capa":
+    img = img_b64(os.path.join(BASE_DIR, "assets", "mumuila.png"))
+
+    st.markdown(f"""
+    <style>
+    .cover-wrap {{
+        position:relative; width:100%; border-radius:20px;
+        overflow:hidden; margin-bottom:1.5rem;
+        box-shadow: 0 24px 80px rgba(0,0,0,.6);
+    }}
+    .cover-img {{
+        width:100%; height:500px; object-fit:cover;
+        object-position:center 18%; display:block; filter:brightness(.35);
+    }}
+    .cover-overlay {{
+        position:absolute; inset:0;
+        background:linear-gradient(110deg,
+            rgba(8,8,16,.97) 30%,
+            rgba(8,8,16,.6) 58%,
+            rgba(8,8,16,.05) 100%);
+    }}
+    .cover-content {{
+        position:absolute; top:50%; left:5.5%;
+        transform:translateY(-50%); max-width:520px;
+    }}
+    .cover-eyebrow {{
+        color:{ANGOLA}; font-size:10px; font-weight:700;
+        letter-spacing:.2em; text-transform:uppercase; margin-bottom:14px;
+        display:flex; align-items:center; gap:8px;
+    }}
+    .cover-eyebrow::before {{
+        content:''; display:inline-block; width:24px;
+        height:2px; background:{ANGOLA};
+    }}
+    .cover-title {{
+        color:{WHITE}; font-size:50px; font-weight:900;
+        line-height:.95; margin-bottom:10px; letter-spacing:-.02em;
+    }}
+    .cover-subtitle {{
+        color:{GOLD}; font-size:16px; font-weight:600;
+        margin-bottom:18px; letter-spacing:.04em;
+    }}
+    .cover-line {{ width:40px; height:2px; background:{ANGOLA}; border-radius:2px; margin-bottom:16px; }}
+    .cover-desc {{ color:#B0A898; font-size:13px; line-height:1.8; margin-bottom:28px; }}
+    .cover-stats {{ display:flex; gap:28px; align-items:flex-end; flex-wrap:wrap; }}
+    .cs-val   {{ color:{WHITE}; font-size:24px; font-weight:800; font-variant-numeric:tabular-nums; }}
+    .cs-label {{ color:{MUTED}; font-size:9px; letter-spacing:.1em; text-transform:uppercase; margin-top:3px; }}
+    .cs-div   {{ width:1px; height:32px; background:#1E1E32; align-self:center; }}
+    </style>
+
+    <div class="cover-wrap">
+        <img class="cover-img" src="data:image/png;base64,{img}">
+        <div class="cover-overlay"></div>
+        <div class="cover-content">
+            <div class="cover-eyebrow">Análise Económica · 2000 – 2023</div>
+            <div class="cover-title">ÁFRICA<br>PIB &amp;<br>CRESCIMENTO</div>
+            <div class="cover-subtitle">30 Países · 23 Anos de Dados</div>
+            <div class="cover-line"></div>
+            <div class="cover-desc">
+                Explore a evolução económica do continente africano, o impacto
+                das grandes eras económicas e o posicionamento de Angola entre
+                as maiores economias de África.
+            </div>
+            <div class="cover-stats">
+                <div>
+                    <div class="cs-val">${m['pib23']:,.0f}B</div>
+                    <div class="cs-label">PIB Total 2023</div>
+                </div>
+                <div class="cs-div"></div>
+                <div>
+                    <div class="cs-val">+{m['cresc_cont']:.0f}%</div>
+                    <div class="cs-label">Crescimento</div>
+                </div>
+                <div class="cs-div"></div>
+                <div>
+                    <div class="cs-val">#8</div>
+                    <div class="cs-label">Angola em África</div>
+                </div>
+                <div class="cs-div"></div>
+                <div>
+                    <div class="cs-val">30</div>
+                    <div class="cs-label">Países</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    s_tot = s.groupby(["Ano", "Era_Económica", "Ordem_Era"])["PIB_USD_Bilhões"].sum().reset_index().sort_values("Ano")
+    s_ago = s[s["Código_ISO3"] == "AGO"].sort_values("Ano")
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=s_tot["Ano"], y=s_tot["PIB_USD_Bilhões"],
+        mode="lines", name="África (total)",
+        line=dict(color=BLUE, width=2.5),
+        fill="tozeroy", fillcolor="rgba(58,58,110,0.08)",
+        hovertemplate="<b>África %{x}</b><br>$%{y:.0f}B<extra></extra>",
+    ))
+    fig.add_trace(go.Scatter(
+        x=s_ago["Ano"], y=s_ago["PIB_USD_Bilhões"],
+        mode="lines+markers", name="Angola",
+        line=dict(color=ANGOLA, width=3),
+        marker=dict(size=7, color=ANGOLA, symbol="circle"),
+        hovertemplate="<b>Angola %{x}</b><br>$%{y:.1f}B<extra></extra>",
+    ))
+    anos_disp = [int(a) for a in s["Ano"].unique()]
+    for ano, label, cor in [(2006, "Boom", GOLD), (2009, "Crise", "#F87171"),
+                             (2014, "Africa Rising", "#27AE60"), (2020, "COVID-19", "#F87171")]:
+        if ano in anos_disp:
+            fig.add_vline(x=ano, line_dash="dot", line_color=cor, line_width=1)
+            fig.add_annotation(x=ano, yref="paper", y=1.03, text=label, showarrow=False,
+                               font=dict(size=9, color=cor), textangle=-20, xanchor="left")
+    fig.update_layout(
+        paper_bgcolor=CARD, plot_bgcolor=CARD,
+        height=270, margin=dict(l=12, r=12, t=36, b=12),
+        font=dict(color=MUTED, size=11),
+        title=dict(text="Evolução do PIB: África Total vs Angola (2000–2023)",
+                   font=dict(color=WHITE, size=13, weight=600), x=0),
+        xaxis=dict(gridcolor="#14142A", zeroline=False, tickmode="array", tickvals=sorted(anos_disp)),
+        yaxis=dict(gridcolor="#14142A", zeroline=False,
+                   title=dict(text="PIB ($B)", font=dict(color=MUTED, size=10))),
+        legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=MUTED, size=11)),
+        hoverlabel=dict(bgcolor="#1A1A2E", font_color=WHITE),
     )
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown(f"""
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin:.8rem 0">
+        <div style="background:#0F1A0F;border:1px solid #1E321E;border-radius:8px;
+                    padding:6px 14px;font-size:11px;color:#B0C8B0">
+            <strong style="color:#F5F0E8">Africa</strong> : visão continental
+        </div>
+        <div style="background:#1A0F00;border:1px solid {ANGOLA}44;border-radius:8px;
+                    padding:6px 14px;font-size:11px;color:#C8B890">
+            <strong style="color:{ANGOLA}">Angola</strong> : posição e comparação
+        </div>
+        <div style="background:#0F0F1A;border:1px solid #2A1A6A;border-radius:8px;
+                    padding:6px 14px;font-size:11px;color:{MUTED_L}">
+            <strong style="color:#F5F0E8">Finanças</strong> : dívida & inflação
+        </div>
+        <div style="background:#0F0F1A;border:1px solid {BORDER};border-radius:8px;
+                    padding:6px 14px;font-size:11px;color:{MUTED_L}">
+            <strong style="color:#F5F0E8">Dicionário</strong> : glossário & KPIs
+        </div>
+        <div style="background:#0F0F1A;border:1px solid {BORDER};border-radius:8px;
+                    padding:6px 14px;font-size:11px;color:{MUTED_L}">
+            <strong style="color:#F5F0E8">Extras</strong> : changelog & roadmap
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div style="display:flex;justify-content:space-between;align-items:center;
+                padding:.8rem 0;border-top:1px solid {BORDER};margin-top:.5rem">
+        <div style="color:{MUTED};font-size:11px">
+            Fonte: World Bank &nbsp;·&nbsp; 30 países · 2000–2023
+        </div>
+        <div style="color:{MUTED};font-size:11px">
+            Navegue pelo menu lateral para explorar os dashboards.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 
-def render(p, s, r, m):
-    ago = m["ago"]
+elif pagina == "África":
+    africa.render(p, s, r, m)
 
-    st.markdown('<div class="page-title">Angola: Posição Continental</div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="page-desc">Angola cresceu +831% desde 2000 quase o triplo da média africana. '
-        'O PIBpc cresceu +312%, mas permanece abaixo da média continental. '
-        'Crescer muito não é o mesmo que enriquecer por habitante.</div>',
-        unsafe_allow_html=True,
-    )
+elif pagina == "Angola":
+    angola_page.render(p, s, r, m)
 
-    # ── Filtros ───────────────────────────────────────────────────────────────
-    with st.expander("Filtros", expanded=True):
-        fc1, fc2 = st.columns(2)
-        with fc1:
-            st.markdown('<div class="filter-label">Era Económica</div>', unsafe_allow_html=True)
-            eras_df    = s[["Era_Económica", "Ordem_Era"]].drop_duplicates().sort_values("Ordem_Era")
-            era_opts   = ["Todas"] + eras_df["Era_Económica"].tolist()
-            filtro_era = st.selectbox("Era", era_opts, label_visibility="collapsed", key="ao_era")
-        with fc2:
-            st.markdown('<div class="filter-label">Score Vulnerabilidade</div>', unsafe_allow_html=True)
-            vuln_opts   = ["Todos", "Abaixo da média (< 1.0)", "Acima da média (≥ 1.0)"]
-            filtro_vuln = st.selectbox("Score", vuln_opts, label_visibility="collapsed", key="ao_vuln")
+elif pagina == "Finanças":
+    financas_page.render(p, s, r, m)
 
-    # ── Derivar conjuntos filtrados ───────────────────────────────────────────
-    pf = m["p"].copy()
-    if filtro_vuln == "Abaixo da média (< 1.0)":
-        pf = pf[(pf["Score_Vuln"] < 1.0) | (pf["Código_ISO3"] == "AGO")]
-    elif filtro_vuln == "Acima da média (≥ 1.0)":
-        pf = pf[(pf["Score_Vuln"] >= 1.0) | (pf["Código_ISO3"] == "AGO")]
+elif pagina == "Dicionário":
+    dicionario_page.render(p, s, r, m)
 
-    sf = s.copy()
-    anos_era = None
-    if filtro_era != "Todas":
-        anos_era = sorted(sf[sf["Era_Económica"] == filtro_era]["Ano"].unique())
-        sf = sf[sf["Ano"].isin(anos_era)]
-
-    grupo_pibpc = pf["PIB_por_Habitante_2023_USD"].mean()
-    grupo_cresc = pf["Crescimento_Acumulado_2000_2023_%"].mean()
-    n_grupo     = len(pf)
-    label_grupo = f"grupo ({n_grupo})" if filtro_vuln != "Todos" else "África (30)"
-
-    s_ago = sf[sf["Código_ISO3"] == "AGO"].sort_values("Ano")
-    if not s_ago.empty and filtro_era != "Todas":
-        pib_ago_inicio = float(s_ago["PIB_USD_Bilhões"].iloc[0])
-        pib_ago_fim    = float(s_ago["PIB_USD_Bilhões"].iloc[-1])
-        cresc_era_ago  = (pib_ago_fim - pib_ago_inicio) / pib_ago_inicio * 100 if pib_ago_inicio else 0
-    else:
-        cresc_era_ago  = ago["Crescimento_Acumulado_2000_2023_%"]
-
-    _badge_filtro(filtro_era, filtro_vuln)
-
-    # ── KPIs ─────────────────────────────────────────────────────────────────
-    section("Indicadores Chave Angola", badge=label_grupo)
-
-    diff_cresc = cresc_era_ago - grupo_cresc
-    diff_pibpc = ago["PIB_por_Habitante_2023_USD"] - grupo_pibpc
-
-    pib_ago_display = float(s_ago["PIB_USD_Bilhões"].iloc[-1]) if (not s_ago.empty and filtro_era != "Todas") else ago["PIB_2023_USD_Bilhões"]
-    pib_ago_base    = float(s_ago["PIB_USD_Bilhões"].iloc[0])  if (not s_ago.empty and filtro_era != "Todas") else ago["PIB_2000_USD_Bilhões"]
-    label_ano_fim   = int(s_ago["Ano"].iloc[-1]) if (not s_ago.empty and filtro_era != "Todas") else 2023
-    label_ano_base  = int(s_ago["Ano"].iloc[0])  if (not s_ago.empty and filtro_era != "Todas") else 2000
-
-    c1, c2, c3, c4, c5 = st.columns(5)
-    with c1: kpi(f"PIB Angola {label_ano_fim}",
-                 f"${pib_ago_display:.1f}B",
-                 f"era ${pib_ago_base:.1f}B em {label_ano_base}")
-    with c2: kpi("Ranking em África",
-                 f"#{int(ago['Ranking_PIB_2023'])} de 30",
-                 f"#{int(ago['Ranking_PIBpc_2023'])}º em PIBpc")
-    with c3: kpi(f"Cresc. vs {label_grupo}",
-                 f"{diff_cresc:+.0f}pp",
-                 f"+{cresc_era_ago:.0f}% Angola vs média +{grupo_cresc:.0f}%",
-                 "green" if diff_cresc >= 0 else "red")
-    with c4: kpi(f"PIBpc vs {label_grupo}",
-                 f"${diff_pibpc:+,.0f}",
-                 f"${ago['PIB_por_Habitante_2023_USD']:,} vs média ${grupo_pibpc:,.0f}",
-                 "red" if diff_pibpc < 0 else "green")
-    with c5: kpi("Impacto COVID",
-                 f"{ago['Impacto_COVID_%']:.1f}%",
-                 f"média {label_grupo} {pf['Impacto_COVID_%'].mean():.1f}%", "red")
-
-    st.markdown("<div style='margin:.6rem 0'></div>", unsafe_allow_html=True)
-
-    # ── Gráfico 5 — Linhas peers ──────────────────────────────────────────────
-    peers_no_grupo = [iso for iso in PEERS if iso == "AGO" or iso in pf["Código_ISO3"].values]
-    s_peers = sf[sf["Código_ISO3"].isin(peers_no_grupo)].sort_values(["Código_ISO3", "Ano"])
-
-    era_label = f" · Era: {filtro_era}" if filtro_era != "Todas" else ""
-    section(f"Angola vs Peers: Evolução PIB{era_label}", badge="NGR · ZAF · ETH")
-
-    if s_peers.empty:
-        _empty_state("Sem dados de série temporal para o período seleccionado.")
-    else:
-        pib_pico   = ago.get("PIB_2014_USD_Bilhões", pib_ago_display)
-        boom_cresc = ago.get("Crescimento_Boom_Commodities_%", 0)
-        insight(
-            f"Angola atingiu o pico de <strong>${pib_pico:.0f}B</strong> em 2014, "
-            f"impulsionado pelo boom do petróleo (+{boom_cresc:.0f}% em 2000–2006). "
-            f"A queda do petróleo (2014–16) e a COVID-19 (-{abs(ago['Impacto_COVID_%']):.1f}%) "
-            f"reduziram o PIB para ${ago['PIB_2020_USD_Bilhões']:.0f}B. Recuperação em curso.",
-            "angola",
-        )
-
-        fig5 = fig_base(kind="line")
-        add_era_highlight(fig5, filtro_era, s)
-
-        for iso, nome in PEERS_N.items():
-            if iso not in peers_no_grupo:
-                continue
-            df_i = s_peers[s_peers["Código_ISO3"] == iso]
-            if df_i.empty:
-                continue
-            cor   = PEERS_C[nome]
-            width = 3 if iso == "AGO" else 1.8
-            fig5.add_trace(go.Scatter(
-                x=df_i["Ano"], y=df_i["PIB_USD_Bilhões"],
-                mode="lines+markers", name=nome,
-                line=dict(color=cor, width=width),
-                marker=dict(size=7 if iso == "AGO" else 5),
-                hovertemplate=f"<b>{nome} %{{x}}</b><br>PIB: $%{{y:.1f}}B<extra></extra>",
-            ))
-
-        anos_peers = sorted(int(a) for a in s_peers["Ano"].unique())
-        for ano, label, cor in [
-            (2006, f"Boom +{boom_cresc:.0f}%", ANGOLA),
-            (2014, "Queda petróleo",            RED),
-            (2020, f"COVID {ago['Impacto_COVID_%']:.1f}%", RED),
-        ]:
-            if ano in anos_peers:
-                add_vline(fig5, ano, label, cor)
-
-        fig5.update_xaxes(tickmode="array", tickvals=anos_peers)
-        fig5.update_yaxes(title=dict(text="PIB ($B)", font=dict(color=MUTED, size=10)))
-        st.plotly_chart(fig5, use_container_width=True)
-
-    # ── Gráfico 6 + 7 ─────────────────────────────────────────────────────────
-    col6, col7 = st.columns(2)
-
-    with col6:
-        n_label = f"{n_grupo} Países" if filtro_vuln != "Todos" else "30 Países"
-        section(f"PIBpc vs Crescimento Acumulado {n_label}", badge="quadrantes analíticos")
-
-        media_cresc = grupo_cresc
-        media_pibpc = grupo_pibpc
-
-        q = (
-            "alto crescimento + PIBpc abaixo da média do grupo"
-            if cresc_era_ago >= media_cresc and ago["PIB_por_Habitante_2023_USD"] < media_pibpc
-            else "outro quadrante"
-        )
-        insight(
-            f"No contexto do <strong>{label_grupo}</strong>, Angola posiciona-se no quadrante de "
-            f"<strong>{q}</strong>. Cresceu <strong>+{cresc_era_ago:.0f}%</strong> vs média "
-            f"+{media_cresc:.0f}% do grupo. PIBpc ${ago['PIB_por_Habitante_2023_USD']:,} "
-            f"vs média ${media_pibpc:,.0f}.",
-            "angola",
-        )
-
-        pf2 = pf.copy()
-        pf2["Destaque"] = pf2["Código_ISO3"].apply(lambda x: "Angola" if x == "AGO" else "Grupo")
-
-        if pf2.empty:
-            _empty_state("Sem países no grupo filtrado.")
-        else:
-            fig6 = px.scatter(
-                pf2,
-                x="Crescimento_Acumulado_2000_2023_%",
-                y="PIB_por_Habitante_2023_USD",
-                size="PIB_2023_USD_Bilhões",
-                color="Destaque",
-                hover_name="País",
-                color_discrete_map={"Angola": ANGOLA, "Grupo": BLUE},
-                labels={
-                    "Crescimento_Acumulado_2000_2023_%": "Crescimento Acumulado (%)",
-                    "PIB_por_Habitante_2023_USD":        "PIBpc 2023 (USD)",
-                },
-                size_max=50,
-            )
-
-            xmax      = pf2["Crescimento_Acumulado_2000_2023_%"].max() * 1.05
-            ymax      = pf2["PIB_por_Habitante_2023_USD"].max() * 1.08
-            label_cor = "rgba(255,255,255,0.13)"
-
-            for xi, yi, label in [
-                (media_cresc / 2, ymax * 0.95,       "Crescimento baixo<br>PIBpc alto"),
-                (xmax * 0.75,     ymax * 0.95,       "Crescimento alto<br>PIBpc alto"),
-                (media_cresc / 2, media_pibpc * 0.2, "Crescimento baixo<br>PIBpc baixo"),
-                (xmax * 0.75,     media_pibpc * 0.2, "Crescimento alto<br>PIBpc baixo"),
-            ]:
-                fig6.add_annotation(
-                    x=xi, y=yi, text=label, showarrow=False,
-                    font=dict(size=8, color=label_cor), align="center",
-                )
-
-            fig6.add_vline(
-                x=media_cresc, line_dash="dash", line_color=MUTED, line_width=1,
-                annotation_text=f"Média grupo {media_cresc:.0f}%",
-                annotation_font_color=MUTED, annotation_position="top left",
-                annotation_font_size=9,
-            )
-            fig6.add_hline(
-                y=media_pibpc, line_dash="dash", line_color=MUTED, line_width=1,
-                annotation_text=f"PIBpc grupo ${media_pibpc:,.0f}",
-                annotation_font_color=MUTED, annotation_position="bottom right",
-                annotation_font_size=9,
-            )
-            fig6.add_annotation(
-                x=ago["Crescimento_Acumulado_2000_2023_%"] + 20,
-                y=ago["PIB_por_Habitante_2023_USD"],
-                text="Angola", showarrow=True, arrowhead=2,
-                arrowcolor=ANGOLA, arrowsize=0.8, arrowwidth=1.5,
-                font=dict(color=ANGOLA, size=11, weight=700), ax=40, ay=-20,
-            )
-            fig6.update_layout(
-                paper_bgcolor=CARD, plot_bgcolor=CARD,
-                height=chart_height("scatter"),
-                margin=dict(l=12, r=12, t=12, b=12),
-                font=dict(color=MUTED, size=11),
-                legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=MUTED, size=10)),
-                xaxis=dict(gridcolor=GRID, zeroline=False),
-                yaxis=dict(gridcolor=GRID, zeroline=False),
-                hoverlabel=dict(bgcolor="#1A1A2E", font_color=WHITE),
-            )
-            st.plotly_chart(fig6, use_container_width=True)
-
-    with col7:
-        top5_pool    = pf.sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False)
-        top5_sem_ago = top5_pool[top5_pool["Código_ISO3"] != "AGO"].head(4)
-        ago_row      = top5_pool[top5_pool["Código_ISO3"] == "AGO"]
-        top5         = (
-            import_concat([top5_sem_ago, ago_row])
-            .sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False)
-        ) if not ago_row.empty else top5_sem_ago
-
-        section(f"Crescimento Acumulado: Angola vs Top do {label_grupo}", badge="2000–2023")
-
-        if top5.empty:
-            _empty_state("Sem dados de crescimento para o grupo filtrado.")
-        else:
-            angola_pos = list(top5["Código_ISO3"]).index("AGO") + 1 if "AGO" in top5["Código_ISO3"].values else "N/A"
-            insight(
-                f"No grupo <strong>{label_grupo}</strong>, Angola (+{cresc_era_ago:.0f}%) "
-                f"ocupa a posição <strong>{angola_pos}ª</strong> em crescimento. "
-                f"Partiu de uma base de <strong>${pib_ago_base:.1f}B</strong> em {label_ano_base}.",
-                "angola",
-            )
-
-            cores = [ANGOLA if x == "AGO" else BLUE for x in top5["Código_ISO3"]]
-            fig7  = fig_base(kind="bar_v")
-            fig7.add_trace(go.Bar(
-                x=top5["País"], y=top5["Crescimento_Acumulado_2000_2023_%"],
-                marker=dict(color=cores, line=dict(width=0)),
-                text=top5["Crescimento_Acumulado_2000_2023_%"].apply(lambda v: f"+{v:.0f}%"),
-                textposition="outside",
-                textfont=dict(color=WHITE, size=10, family="JetBrains Mono"),
-                hovertemplate="<b>%{x}</b><br>Crescimento: +%{y:.1f}%<extra></extra>",
-            ))
-            fig7.add_hline(
-                y=grupo_cresc, line_dash="dash", line_color=MUTED, line_width=1,
-                annotation_text=f"Média {label_grupo} +{grupo_cresc:.0f}%",
-                annotation_font_color=MUTED, annotation_position="bottom right",
-                annotation_font_size=9,
-            )
-            fig7.update_yaxes(showticklabels=False)
-            st.plotly_chart(fig7, use_container_width=True)
-
-    # ── Gráfico 8 — Tabela + Radar ────────────────────────────────────────────
-    col8, colm = st.columns([3, 2])
-
-    with col8:
-        section(f"Comparação — Angola vs Top {label_grupo}", badge="análise multidimensional")
-
-        tabela_pool = pf.sort_values("Ranking_PIB_2023")
-        tabela_df   = tabela_pool.head(6)
-
-        if "AGO" not in tabela_df["Código_ISO3"].values and not ago_row.empty:
-            tabela_df = import_concat([tabela_df, ago_row]).drop_duplicates("Código_ISO3")
-
-        if tabela_df.empty:
-            _empty_state("Sem dados para a tabela comparativa.")
-        else:
-            colunas = {
-                "País":                              "País",
-                "PIB_2023_USD_Bilhões":              "PIB 2023 ($B)",
-                "PIB_por_Habitante_2023_USD":        "PIBpc (USD)",
-                "Crescimento_Acumulado_2000_2023_%": "Cresc. Acum. (%)",
-                "Inflação_2022_%":                   "Inflação (%)",
-                "Recuperacao_COVID_%":               "Rec. COVID (%)",
-            }
-            tv = tabela_df[list(colunas.keys())].rename(columns=colunas).reset_index(drop=True)
-
-            def estilo_linha(row):
-                if row["País"] == "Angola":
-                    return [f"background-color:#180A00;color:{ANGOLA};font-weight:700;"] * len(row)
-                return [""] * len(row)
-
-            def estilo_cols(df):
-                styles = df.copy().map(lambda _: "")
-                for col in ["Cresc. Acum. (%)", "Rec. COVID (%)"]:
-                    if col in df.columns:
-                        mx = df[col].max()
-                        mn = df[col].min()
-                        for i, v in enumerate(df[col]):
-                            if df["País"].iloc[i] != "Angola":
-                                intensity = int(60 * (v - mn) / (mx - mn + 0.001))
-                                styles.loc[i, col] = f"color: rgb({80+intensity},{80+intensity},{200+intensity//2})"
-                return styles
-
-            styled = (
-                tv.style
-                .apply(estilo_linha, axis=1)
-                .apply(estilo_cols, axis=None)
-                .format({
-                    "PIB 2023 ($B)":    "{:.1f}",
-                    "PIBpc (USD)":      "{:,.0f}",
-                    "Cresc. Acum. (%)": "+{:.1f}",
-                    "Inflação (%)":     "{:.1f}",
-                    "Rec. COVID (%)":   "+{:.1f}",
-                })
-                .set_properties(**{
-                    "background-color": CARD, "color": WHITE,
-                    "border-color": BORDER, "font-size": "12px",
-                })
-                .set_table_styles([{"selector": "th", "props": [
-                    ("background-color", "#0A0A16"), ("color", MUTED),
-                    ("font-size", "10px"), ("font-weight", "600"),
-                    ("text-transform", "uppercase"), ("letter-spacing", ".08em"),
-                    ("border-color", BORDER), ("padding", "8px 12px"),
-                ]}])
-            )
-            st.dataframe(styled, use_container_width=True, hide_index=True)
-
-    with colm:
-        section("Perfil Macroeconómico: Angola", badge="radar comparativo")
-
-        ago_data = m["p"][m["p"]["Código_ISO3"] == "AGO"]
-        if ago_data.empty:
-            _empty_state("Dados de Angola não disponíveis.")
-        else:
-            ago_data  = ago_data.iloc[0]
-            n_paises  = len(pf)
-
-            rank_pib   = int(pf.sort_values("PIB_2023_USD_Bilhões", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_PIB_2023"])
-            rank_pibpc = int(pf.sort_values("PIB_por_Habitante_2023_USD", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_PIBpc_2023"])
-            rank_cresc = int(pf.sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_Crescimento_Acumulado"])
-
-            denom = max(n_paises - 1, 1)
-            dims  = {
-                "PIB (rank inv.)":   1 - (rank_pib   - 1) / denom,
-                "PIBpc (rank inv.)": 1 - (rank_pibpc - 1) / denom,
-                "Crescimento":       1 - (rank_cresc  - 1) / denom,
-                "Estabilidade":      1 - min(ago_data["Score_Vuln"] / 3, 1),
-                "Rec. COVID":        min(ago_data["Recuperacao_COVID_%"] / 100, 1),
-            }
-
-            cats = list(dims.keys()) + [list(dims.keys())[0]]
-            vals = list(dims.values()) + [list(dims.values())[0]]
-
-            fig_r = go.Figure(go.Scatterpolar(
-                r=vals, theta=cats, fill="toself",
-                fillcolor="rgba(232,114,10,0.15)",
-                line=dict(color=ANGOLA, width=2),
-                marker=dict(size=6, color=ANGOLA),
-                hovertemplate="<b>%{theta}</b><br>Score: %{r:.2f}<extra></extra>",
-            ))
-            fig_r.update_layout(
-                polar=dict(
-                    bgcolor=CARD_L,
-                    radialaxis=dict(
-                        visible=True, range=[0, 1],
-                        tickfont=dict(size=8, color=MUTED),
-                        gridcolor=GRID, linecolor=BORDER,
-                        tickvals=[0.25, 0.5, 0.75, 1.0],
-                        ticktext=["25%", "50%", "75%", "100%"],
-                    ),
-                    angularaxis=dict(
-                        tickfont=dict(size=10, color=MUTED_L),
-                        linecolor=BORDER, gridcolor=GRID,
-                    ),
-                ),
-                showlegend=False,
-                paper_bgcolor=CARD, plot_bgcolor=CARD,
-                height=chart_height("radar"),
-                margin=dict(l=20, r=20, t=20, b=20),
-                font=dict(color=MUTED),
-                hoverlabel=dict(bgcolor="#1A1A2E", font_color=WHITE),
-            )
-            insight(
-                f"No grupo <strong>{label_grupo}</strong>, Angola é #<strong>{rank_cresc}</strong> "
-                f"em crescimento e #<strong>{rank_pib}</strong> em PIB. "
-                f"Estabilidade limitada por inflação de {ago_data['Inflação_2022_%']:.1f}% "
-                f"e dívida de {ago_data['Dívida_Pública_%_PIB_2022']:.1f}% do PIB.",
-                "angola",
-            )
-            st.plotly_chart(fig_r, use_container_width=True)
-
-
-import pandas as _pd
-def import_concat(dfs): return _pd.concat(dfs, ignore_index=True)
+elif pagina == "Extras":
+    extras_page.render(p, s, r, m)
