@@ -14,10 +14,10 @@ PLOTLY_BASE = dict(
     hoverlabel=dict(bgcolor="#1A1A2E", font_color=WHITE, font_size=12),
 )
 
-# Alturas base por tipo de gráfico usadas em todo o projecto.
+# Alturas base por tipo de gráfico — usadas em todo o projecto.
 # Ajustam automaticamente o tamanho sem valores fixos espalhados por cada ficheiro.
 HEIGHTS = {
-    "map":      420,   # coroplético precisa de mais altura
+    "map":      420,   # coroplético — precisa de mais altura
     "bar_h":    320,   # bar horizontal (rankings, dívida, inflação)
     "bar_v":    300,   # bar vertical (comparações, crescimento)
     "line":     360,   # séries temporais
@@ -36,8 +36,8 @@ def chart_height(kind="default", n_items=None):
     """
     base = HEIGHTS.get(kind, HEIGHTS["default"])
     if kind in ("bar_h", "lollipop") and n_items is not None:
-        # Mínimo de 24px por item, máximo de 600px
-        return max(base, min(n_items * 24, 600))
+        # 20px por item, mínimo 280px, máximo 480px
+        return max(280, min(n_items * 20, 480))
     return base
 
 
