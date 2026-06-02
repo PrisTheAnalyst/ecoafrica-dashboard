@@ -33,52 +33,82 @@ html, body, [data-testid="stApp"] {
     background: #080810;
     font-family: 'Inter', sans-serif;
 }
+
+/* Esconde apenas elementos decorativos — NÃO esconde o toolbar
+   para que o botão de reabrir a sidebar funcione em mobile */
 #MainMenu, footer, header,
-[data-testid="stToolbar"],
 [data-testid="stDecoration"] { display:none !important; }
-.block-container { padding:1.5rem 2rem 3rem !important; max-width:1440px !important; }
+
+/* O botão de colapso/expansão da sidebar fica visível mas discreto */
+[data-testid="stSidebarCollapseButton"] {
+    background: #0A0A16 !important;
+    border: 1px solid #1E1E32 !important;
+    color: #8A8090 !important;
+    border-radius: 0 6px 6px 0 !important;
+}
+[data-testid="stSidebarCollapseButton"]:hover {
+    background: #1E1E32 !important;
+    color: #F5F0E8 !important;
+}
+
+/* Botão de reabrir sidebar quando ela está fechada */
+[data-testid="stSidebarOpenButton"] button {
+    background: #0A0A16 !important;
+    border: 1px solid #1E1E32 !important;
+    color: #8A8090 !important;
+}
+[data-testid="stSidebarOpenButton"] button:hover {
+    background: #1E1E32 !important;
+    color: #F5F0E8 !important;
+}
+
+.block-container {
+    padding: 1.5rem 2rem 3rem !important;
+    max-width: 1440px !important;
+}
 
 /* ── Sidebar ── */
 [data-testid="stSidebar"] {
     background: #0A0A16 !important;
     border-right: 1px solid #1E1E32 !important;
-    min-width:220px !important; max-width:220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
 }
-[data-testid="stSidebarContent"] { padding:2rem 1.3rem !important; }
-.nav-brand { color:#F5F0E8; font-size:17px; font-weight:800; letter-spacing:.01em; }
-.nav-version { color:#E8720A; font-size:10px; font-weight:600;
-               letter-spacing:.12em; text-transform:uppercase;
-               background:#1E0A00; padding:2px 7px; border-radius:4px;
-               display:inline-block; margin-top:4px; }
-.nav-sub   { color:#8A8090; font-size:10px; letter-spacing:.1em;
-             text-transform:uppercase; padding-bottom:1.2rem;
-             border-bottom:1px solid #1E1E32; margin-bottom:1.4rem; }
-.nav-label { color:#8A8090; font-size:10px; font-weight:600;
-             letter-spacing:.12em; text-transform:uppercase; margin-bottom:.5rem; }
-.nav-footer{ color:#8A8090; font-size:10px; line-height:2;
-             border-top:1px solid #1E1E32; padding-top:1.2rem; margin-top:1.5rem; }
+[data-testid="stSidebarContent"] { padding: 2rem 1.3rem !important; }
+.nav-brand   { color: #F5F0E8; font-size: 17px; font-weight: 800; letter-spacing: .01em; }
+.nav-version { color: #E8720A; font-size: 10px; font-weight: 600;
+               letter-spacing: .12em; text-transform: uppercase;
+               background: #1E0A00; padding: 2px 7px; border-radius: 4px;
+               display: inline-block; margin-top: 4px; }
+.nav-sub     { color: #8A8090; font-size: 10px; letter-spacing: .1em;
+               text-transform: uppercase; padding-bottom: 1.2rem;
+               border-bottom: 1px solid #1E1E32; margin-bottom: 1.4rem; }
+.nav-label   { color: #8A8090; font-size: 10px; font-weight: 600;
+               letter-spacing: .12em; text-transform: uppercase; margin-bottom: .5rem; }
+.nav-footer  { color: #8A8090; font-size: 10px; line-height: 2;
+               border-top: 1px solid #1E1E32; padding-top: 1.2rem; margin-top: 1.5rem; }
 
 /* ── KPI cards ── */
 .kpi {
     background: linear-gradient(135deg, #0F0F1A 0%, #13132A 100%);
     border: 1px solid #1E1E32;
-    border-radius:14px; padding:1.1rem 1.3rem; text-align:center;
+    border-radius: 14px; padding: 1.1rem 1.3rem; text-align: center;
     transition: border-color .2s, transform .15s;
     position: relative; overflow: hidden;
 }
 .kpi::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
     background: linear-gradient(90deg, transparent, #E8720A33, transparent);
 }
-.kpi:hover { border-color:#E8720A55; transform:translateY(-1px); }
-.kpi-label { color:#8A8090; font-size:10px; font-weight:600;
-             text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
-.kpi-value { color:#F5F0E8; font-size:22px; font-weight:700; line-height:1.1;
-             font-variant-numeric:tabular-nums; }
-.kpi-sub   { color:#8A8090; font-size:11px; margin-top:5px; }
-.kpi-pos   { color:#4ADE80; font-size:22px; font-weight:700; }
-.kpi-neg   { color:#F87171; font-size:22px; font-weight:700; }
-.kpi-warn  { color:#E8720A; font-size:22px; font-weight:700; }
+.kpi:hover { border-color: #E8720A55; transform: translateY(-1px); }
+.kpi-label { color: #8A8090; font-size: 10px; font-weight: 600;
+             text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+.kpi-value { color: #F5F0E8; font-size: 22px; font-weight: 700; line-height: 1.1;
+             font-variant-numeric: tabular-nums; }
+.kpi-sub   { color: #8A8090; font-size: 11px; margin-top: 5px; }
+.kpi-pos   { color: #4ADE80; font-size: 22px; font-weight: 700; }
+.kpi-neg   { color: #F87171; font-size: 22px; font-weight: 700; }
+.kpi-warn  { color: #E8720A; font-size: 22px; font-weight: 700; }
 
 /* ── Insight box ── */
 .insight {
@@ -106,27 +136,114 @@ html, body, [data-testid="stApp"] {
 
 /* ── Section heading ── */
 .sec {
-    display:flex; align-items:center; gap:10px;
+    display: flex; align-items: center; gap: 10px;
     margin: 1.8rem 0 .8rem;
 }
-.sec-line { width:3px; height:18px; background:#E8720A; border-radius:2px; flex-shrink:0; }
-.sec-text { color:#F5F0E8; font-size:12px; font-weight:700;
-            text-transform:uppercase; letter-spacing:.1em; }
-.sec-badge { color:#8A8090; font-size:10px; background:#1E1E32;
-             padding:2px 8px; border-radius:4px; margin-left:auto; }
+.sec-line  { width: 3px; height: 18px; background: #E8720A; border-radius: 2px; flex-shrink: 0; }
+.sec-text  { color: #F5F0E8; font-size: 12px; font-weight: 700;
+             text-transform: uppercase; letter-spacing: .1em; }
+.sec-badge { color: #8A8090; font-size: 10px; background: #1E1E32;
+             padding: 2px 8px; border-radius: 4px; margin-left: auto; }
 
 /* ── Page header ── */
-.page-title { color:#F5F0E8; font-size:24px; font-weight:800; margin-bottom:3px; letter-spacing:-.01em; }
-.page-desc  { color:#8A8090; font-size:13px; margin-bottom:1.4rem; line-height:1.6; }
+.page-title { color: #F5F0E8; font-size: 24px; font-weight: 800; margin-bottom: 3px; letter-spacing: -.01em; }
+.page-desc  { color: #8A8090; font-size: 13px; margin-bottom: 1.4rem; line-height: 1.6; }
 
 /* ── Metric delta inline ── */
-.delta-pos { color:#4ADE80; font-size:11px; font-weight:600; }
-.delta-neg { color:#F87171; font-size:11px; font-weight:600; }
+.delta-pos { color: #4ADE80; font-size: 11px; font-weight: 600; }
+.delta-neg { color: #F87171; font-size: 11px; font-weight: 600; }
 
 /* ── Filter label ── */
-.filter-label { color:#8A8090; font-size:10px; font-weight:600;
-                letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; }
+.filter-label { color: #8A8090; font-size: 10px; font-weight: 600;
+                letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
 
-hr { border-color:#1E1E32; margin:.8rem 0; }
+hr { border-color: #1E1E32; margin: .8rem 0; }
+
+/* ────────────────────────────────────────────────────────────────
+   RESPONSIVIDADE — tablets e mobile
+   ──────────────────────────────────────────────────────────────── */
+
+/* Tablet: 768px – 1024px */
+@media (max-width: 1024px) {
+    .block-container {
+        padding: 1rem 1.2rem 2rem !important;
+    }
+    [data-testid="stSidebar"] {
+        min-width: 200px !important;
+        max-width: 200px !important;
+    }
+    .kpi-value, .kpi-pos, .kpi-neg, .kpi-warn {
+        font-size: 18px !important;
+    }
+    .page-title {
+        font-size: 20px !important;
+    }
+}
+
+/* Mobile: até 768px */
+@media (max-width: 768px) {
+    .block-container {
+        padding: 0.75rem 0.75rem 2rem !important;
+    }
+
+    /* KPIs empilham melhor com fonte menor */
+    .kpi {
+        padding: 0.8rem 0.9rem !important;
+    }
+    .kpi-value, .kpi-pos, .kpi-neg, .kpi-warn {
+        font-size: 16px !important;
+    }
+    .kpi-label {
+        font-size: 9px !important;
+    }
+    .kpi-sub {
+        font-size: 10px !important;
+    }
+
+    /* Títulos de página menores */
+    .page-title {
+        font-size: 18px !important;
+        margin-bottom: 2px !important;
+    }
+    .page-desc {
+        font-size: 12px !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Section headings */
+    .sec {
+        margin: 1.2rem 0 .6rem !important;
+    }
+    .sec-text {
+        font-size: 11px !important;
+    }
+
+    /* Insights */
+    .insight {
+        font-size: 11px !important;
+        padding: .6rem .9rem !important;
+    }
+
+    /* Gráficos Plotly — permite scroll horizontal em vez de truncar */
+    [data-testid="stPlotlyChart"] {
+        overflow-x: auto !important;
+    }
+    [data-testid="stPlotlyChart"] > div {
+        min-width: 320px !important;
+    }
+}
+
+/* Mobile pequeno: até 480px */
+@media (max-width: 480px) {
+    .block-container {
+        padding: 0.5rem 0.5rem 1.5rem !important;
+    }
+    .kpi-value, .kpi-pos, .kpi-neg, .kpi-warn {
+        font-size: 14px !important;
+    }
+    .page-title {
+        font-size: 16px !important;
+    }
+}
 </style>
 """
