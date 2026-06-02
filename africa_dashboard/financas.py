@@ -98,7 +98,7 @@ def render(p, s, r, m):
     st.markdown("<div style='margin:.6rem 0'></div>", unsafe_allow_html=True)
 
     # ── Gráfico A — Dívida pública ranking (bar horizontal) ──────────────────
-    section("Dívida Pública — Ranking (% do PIB, 2022)", badge="limiar FMI 60%")
+    section("Dívida Pública: Ranking (% do PIB, 2022)", badge="limiar FMI 60%")
 
     df_div = pf.dropna(subset=["Dívida_Pública_%_PIB_2022"]).sort_values(
         "Dívida_Pública_%_PIB_2022", ascending=True
@@ -136,10 +136,10 @@ def render(p, s, r, m):
             hovertemplate="<b>%{y}</b><br>Dívida: %{x:.1f}% do PIB<extra></extra>",
         ))
         fig_a.add_vline(x=LIMIAR_DIVIDA_MED,  line_dash="dash", line_color=GOLD, line_width=1,
-                        annotation_text="60% — Moderado",    annotation_font_color=GOLD,
+                        annotation_text="60%  Moderado",    annotation_font_color=GOLD,
                         annotation_position="top right",     annotation_font_size=9)
         fig_a.add_vline(x=LIMIAR_DIVIDA_ALTO, line_dash="dash", line_color=RED,  line_width=1,
-                        annotation_text="100% — Alto Risco", annotation_font_color=RED,
+                        annotation_text="100%   Alto Risco", annotation_font_color=RED,
                         annotation_position="top right",     annotation_font_size=9)
         fig_a.update_xaxes(title=dict(text="% do PIB", font=dict(color=MUTED, size=10)))
         fig_a.update_yaxes(tickfont=dict(size=10))
@@ -148,14 +148,8 @@ def render(p, s, r, m):
     # ── Gráfico B + C ─────────────────────────────────────────────────────────
     col_b, col_c = st.columns(2)
 
-    # ── Gráfico B — Inflação: Lollipop/Dot chart (substitui bar horizontal) ──
-    # Motivo da troca: o gráfico A já é um bar horizontal de ranking.
-    # Dois bars horizontais seguidos com a mesma orientação e estrutura
-    # criam confusão visual — o utilizador tem de ler o título para perceber
-    # que são métricas diferentes. O lollipop mantém o mesmo tipo de análise
-    # (ranking ordenado de inflação por país) mas usa um idioma visual distinto:
-    # uma linha fina + ponto em vez de uma barra cheia. Isso diferencia
-    # imediatamente os dois gráficos sem perder nenhuma informação.
+    # ── Gráfico B  Inflação: Lollipop/Dot chart (substitui bar horizontal) 
+
     with col_b:
         section("Inflação — Ranking (%, 2022)", badge="limiar: 10% / 20%")
 
