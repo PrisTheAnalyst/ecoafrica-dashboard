@@ -34,21 +34,9 @@ html, body, [data-testid="stApp"] {
     font-family: 'Inter', sans-serif;
 }
 
-/* Esconde elementos decorativos mas mantém botões de navegação da sidebar */
+/* Esconde apenas elementos decorativos */
 #MainMenu, footer,
-[data-testid="stDecoration"],
-[data-testid="stToolbar"] { display:none !important; }
-
-/* Garante que o botão de colapso da sidebar é clicável */
-[data-testid="stSidebarCollapseButton"] button {
-    background: #0A0A16 !important;
-    border: 1px solid #1E1E32 !important;
-    color: #8A8090 !important;
-}
-[data-testid="stSidebarCollapseButton"] button:hover {
-    background: #1E1E32 !important;
-    color: #F5F0E8 !important;
-}
+[data-testid="stDecoration"] { display:none !important; }
 
 .block-container {
     padding: 1.5rem 2rem 3rem !important;
