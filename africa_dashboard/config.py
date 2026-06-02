@@ -57,7 +57,7 @@ html, body, [data-testid="stApp"] {
 }
 
 .block-container {
-    padding: 1.5rem 2rem 3rem !important;
+    padding: 3.5rem 2rem 3rem !important;
     max-width: 1440px !important;
 }
 
