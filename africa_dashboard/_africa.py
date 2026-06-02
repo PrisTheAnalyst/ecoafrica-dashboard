@@ -19,7 +19,7 @@ def _empty_state(msg="Nenhum país corresponde aos filtros seleccionados."):
 def render(p, s, r, m):
     st.markdown('<div class="page-title">Africa Economia 2000–2023</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="page-desc">PIB de 30 países africanos ao longo de 23 anos · '
+        '<div class="page-desc">PIB de 30 países africanos, ao longo de 23 anos · '
         'Crescimento, distribuição regional e posicionamento das maiores economias do continente.</div>',
         unsafe_allow_html=True,
     )
@@ -36,7 +36,7 @@ def render(p, s, r, m):
             perf_opts   = ["Todos"] + sorted(p["Perfil_Económico"].dropna().unique().tolist())
             filtro_perf = st.selectbox("Perfil", perf_opts, label_visibility="collapsed", key="af_perf")
         with fc3:
-            st.markdown('<div class="filter-label">Era Económica — destaque no gráfico de linhas</div>', unsafe_allow_html=True)
+            st.markdown('<div class="filter-label">Era Económica: destaque no gráfico de linhas</div>', unsafe_allow_html=True)
             eras_df    = s[["Era_Económica", "Ordem_Era"]].drop_duplicates().sort_values("Ordem_Era")
             era_opts   = ["Todas"] + eras_df["Era_Económica"].tolist()
             filtro_era = st.selectbox("Era", era_opts, label_visibility="collapsed", key="af_era")
@@ -47,7 +47,7 @@ def render(p, s, r, m):
 
     if pf.empty:
         section("Indicadores Chave", badge="0 países")
-        _empty_state("Nenhum país corresponde à combinação de filtros. Ajuste a Região ou o Perfil Económico.")
+        _empty_state("Nenhum país corresponde à combinação de filtros. Busque noutra Região ou o Perfil Económico.")
         return
 
     # ── KPIs ─────────────────────────────────────────────────────────────────
