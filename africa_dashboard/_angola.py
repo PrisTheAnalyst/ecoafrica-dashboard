@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
-from components import kpi, insight, section, fig_base, add_vline, add_era_highlight
+from components import kpi, insight, section, fig_base, add_vline, add_era_highlight, chart_height
 from config import (ANGOLA, ANGOLA_D, BLUE, BLUE_L, GREEN, GREEN_L, RED, GOLD,
                     WHITE, MUTED, MUTED_L, CARD, CARD_L, GRID, BORDER,
                     PEERS, PEERS_N, PEERS_C, TOP5_ISO)
@@ -18,7 +18,6 @@ def _empty_state(msg="Sem dados para os filtros seleccionados."):
 
 
 def _badge_filtro(filtro_era, filtro_vuln):
-    """Pill informativa activa quando há filtros seleccionados."""
     partes = []
     if filtro_era  != "Todas": partes.append(f"Era: <strong>{filtro_era}</strong>")
     if filtro_vuln != "Todos": partes.append(f"Vuln: <strong>{filtro_vuln}</strong>")
@@ -60,27 +59,23 @@ def render(p, s, r, m):
             filtro_vuln = st.selectbox("Score", vuln_opts, label_visibility="collapsed", key="ao_vuln")
 
     # ── Derivar conjuntos filtrados ───────────────────────────────────────────
-    # pf  → países filtrados por vulnerabilidade (Angola incluída sempre)
     pf = m["p"].copy()
     if filtro_vuln == "Abaixo da média (< 1.0)":
         pf = pf[(pf["Score_Vuln"] < 1.0) | (pf["Código_ISO3"] == "AGO")]
     elif filtro_vuln == "Acima da média (≥ 1.0)":
         pf = pf[(pf["Score_Vuln"] >= 1.0) | (pf["Código_ISO3"] == "AGO")]
 
-    # sf  → série temporal filtrada por era (todos os peers, restrito ao período)
     sf = s.copy()
     anos_era = None
     if filtro_era != "Todas":
         anos_era = sorted(sf[sf["Era_Económica"] == filtro_era]["Ano"].unique())
         sf = sf[sf["Ano"].isin(anos_era)]
 
-    # Métricas do grupo filtrado (usadas nos KPIs e insights)
-    grupo_pibpc  = pf["PIB_por_Habitante_2023_USD"].mean()
-    grupo_cresc  = pf["Crescimento_Acumulado_2000_2023_%"].mean()
-    n_grupo      = len(pf)
-    label_grupo  = f"grupo ({n_grupo})" if filtro_vuln != "Todos" else "África (30)"
+    grupo_pibpc = pf["PIB_por_Habitante_2023_USD"].mean()
+    grupo_cresc = pf["Crescimento_Acumulado_2000_2023_%"].mean()
+    n_grupo     = len(pf)
+    label_grupo = f"grupo ({n_grupo})" if filtro_vuln != "Todos" else "África (30)"
 
-    # Angola — valores do período filtrado (via sf) ou acumulados
     s_ago = sf[sf["Código_ISO3"] == "AGO"].sort_values("Ano")
     if not s_ago.empty and filtro_era != "Todas":
         pib_ago_inicio = float(s_ago["PIB_USD_Bilhões"].iloc[0])
@@ -97,7 +92,6 @@ def render(p, s, r, m):
     diff_cresc = cresc_era_ago - grupo_cresc
     diff_pibpc = ago["PIB_por_Habitante_2023_USD"] - grupo_pibpc
 
-    # PIB Angola no período da era (ou 2023 se "Todas")
     pib_ago_display = float(s_ago["PIB_USD_Bilhões"].iloc[-1]) if (not s_ago.empty and filtro_era != "Todas") else ago["PIB_2023_USD_Bilhões"]
     pib_ago_base    = float(s_ago["PIB_USD_Bilhões"].iloc[0])  if (not s_ago.empty and filtro_era != "Todas") else ago["PIB_2000_USD_Bilhões"]
     label_ano_fim   = int(s_ago["Ano"].iloc[-1]) if (not s_ago.empty and filtro_era != "Todas") else 2023
@@ -125,7 +119,6 @@ def render(p, s, r, m):
     st.markdown("<div style='margin:.6rem 0'></div>", unsafe_allow_html=True)
 
     # ── Gráfico 5 — Linhas peers ──────────────────────────────────────────────
-    # Peers: sempre Angola + NGA + ZAF + ETH, mas restritos ao período da era
     peers_no_grupo = [iso for iso in PEERS if iso == "AGO" or iso in pf["Código_ISO3"].values]
     s_peers = sf[sf["Código_ISO3"].isin(peers_no_grupo)].sort_values(["Código_ISO3", "Ano"])
 
@@ -135,8 +128,8 @@ def render(p, s, r, m):
     if s_peers.empty:
         _empty_state("Sem dados de série temporal para o período seleccionado.")
     else:
-        pib_pico    = ago.get("PIB_2014_USD_Bilhões", pib_ago_display)
-        boom_cresc  = ago.get("Crescimento_Boom_Commodities_%", 0)
+        pib_pico   = ago.get("PIB_2014_USD_Bilhões", pib_ago_display)
+        boom_cresc = ago.get("Crescimento_Boom_Commodities_%", 0)
         insight(
             f"Angola atingiu o pico de <strong>${pib_pico:.0f}B</strong> em 2014, "
             f"impulsionado pelo boom do petróleo (+{boom_cresc:.0f}% em 2000–2006). "
@@ -145,8 +138,8 @@ def render(p, s, r, m):
             "angola",
         )
 
-        fig5 = fig_base(height=380)
-        add_era_highlight(fig5, filtro_era, s)  # highlight usa `s` completo para calcular limites
+        fig5 = fig_base(kind="line")
+        add_era_highlight(fig5, filtro_era, s)
 
         for iso, nome in PEERS_N.items():
             if iso not in peers_no_grupo:
@@ -167,7 +160,7 @@ def render(p, s, r, m):
         anos_peers = sorted(int(a) for a in s_peers["Ano"].unique())
         for ano, label, cor in [
             (2006, f"Boom +{boom_cresc:.0f}%", ANGOLA),
-            (2014, "Queda petróleo", RED),
+            (2014, "Queda petróleo",            RED),
             (2020, f"COVID {ago['Impacto_COVID_%']:.1f}%", RED),
         ]:
             if ano in anos_peers:
@@ -184,7 +177,6 @@ def render(p, s, r, m):
         n_label = f"{n_grupo} Países" if filtro_vuln != "Todos" else "30 Países"
         section(f"PIBpc vs Crescimento Acumulado {n_label}", badge="quadrantes analíticos")
 
-        # Médias do grupo filtrado (linhas de quadrante reactivas)
         media_cresc = grupo_cresc
         media_pibpc = grupo_pibpc
 
@@ -201,7 +193,6 @@ def render(p, s, r, m):
             "angola",
         )
 
-        # Scatter com países do grupo filtrado + Angola sempre visível
         pf2 = pf.copy()
         pf2["Destaque"] = pf2["Código_ISO3"].apply(lambda x: "Angola" if x == "AGO" else "Grupo")
 
@@ -218,13 +209,13 @@ def render(p, s, r, m):
                 color_discrete_map={"Angola": ANGOLA, "Grupo": BLUE},
                 labels={
                     "Crescimento_Acumulado_2000_2023_%": "Crescimento Acumulado (%)",
-                    "PIB_por_Habitante_2023_USD": "PIBpc 2023 (USD)",
+                    "PIB_por_Habitante_2023_USD":        "PIBpc 2023 (USD)",
                 },
                 size_max=50,
             )
 
-            xmax = pf2["Crescimento_Acumulado_2000_2023_%"].max() * 1.05
-            ymax = pf2["PIB_por_Habitante_2023_USD"].max() * 1.08
+            xmax      = pf2["Crescimento_Acumulado_2000_2023_%"].max() * 1.05
+            ymax      = pf2["PIB_por_Habitante_2023_USD"].max() * 1.08
             label_cor = "rgba(255,255,255,0.13)"
 
             for xi, yi, label in [
@@ -258,7 +249,8 @@ def render(p, s, r, m):
                 font=dict(color=ANGOLA, size=11, weight=700), ax=40, ay=-20,
             )
             fig6.update_layout(
-                paper_bgcolor=CARD, plot_bgcolor=CARD, height=380,
+                paper_bgcolor=CARD, plot_bgcolor=CARD,
+                height=chart_height("scatter"),
                 margin=dict(l=12, r=12, t=12, b=12),
                 font=dict(color=MUTED, size=11),
                 legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=MUTED, size=10)),
@@ -269,9 +261,7 @@ def render(p, s, r, m):
             st.plotly_chart(fig6, use_container_width=True)
 
     with col7:
-        # Top 5 do grupo filtrado por crescimento (Angola incluída sempre)
-        top5_pool = pf.sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False)
-        # Garante Angola no conjunto mesmo que não esteja no top5 natural
+        top5_pool    = pf.sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False)
         top5_sem_ago = top5_pool[top5_pool["Código_ISO3"] != "AGO"].head(4)
         ago_row      = top5_pool[top5_pool["Código_ISO3"] == "AGO"]
         top5         = (
@@ -293,7 +283,7 @@ def render(p, s, r, m):
             )
 
             cores = [ANGOLA if x == "AGO" else BLUE for x in top5["Código_ISO3"]]
-            fig7  = fig_base(height=340)
+            fig7  = fig_base(kind="bar_v")
             fig7.add_trace(go.Bar(
                 x=top5["País"], y=top5["Crescimento_Acumulado_2000_2023_%"],
                 marker=dict(color=cores, line=dict(width=0)),
@@ -317,11 +307,9 @@ def render(p, s, r, m):
     with col8:
         section(f"Comparação — Angola vs Top {label_grupo}", badge="análise multidimensional")
 
-        # Tabela: Angola + top 5 por PIB do grupo filtrado
         tabela_pool = pf.sort_values("Ranking_PIB_2023")
-        tabela_df   = tabela_pool.head(6)   # top 6 do grupo (inclui Angola se estiver)
+        tabela_df   = tabela_pool.head(6)
 
-        # Garante Angola mesmo que fora do top6
         if "AGO" not in tabela_df["Código_ISO3"].values and not ago_row.empty:
             tabela_df = import_concat([tabela_df, ago_row]).drop_duplicates("Código_ISO3")
 
@@ -367,10 +355,8 @@ def render(p, s, r, m):
                     "Rec. COVID (%)":   "+{:.1f}",
                 })
                 .set_properties(**{
-                    "background-color": CARD,
-                    "color": WHITE,
-                    "border-color": BORDER,
-                    "font-size": "12px",
+                    "background-color": CARD, "color": WHITE,
+                    "border-color": BORDER, "font-size": "12px",
                 })
                 .set_table_styles([{"selector": "th", "props": [
                     ("background-color", "#0A0A16"), ("color", MUTED),
@@ -388,16 +374,15 @@ def render(p, s, r, m):
         if ago_data.empty:
             _empty_state("Dados de Angola não disponíveis.")
         else:
-            ago_data   = ago_data.iloc[0]
-            n_paises   = len(pf)
+            ago_data  = ago_data.iloc[0]
+            n_paises  = len(pf)
 
-            # Rankings recalculados dentro do grupo filtrado
-            rank_pib    = int(pf.sort_values("PIB_2023_USD_Bilhões", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_PIB_2023"])
-            rank_pibpc  = int(pf.sort_values("PIB_por_Habitante_2023_USD", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_PIBpc_2023"])
-            rank_cresc  = int(pf.sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_Crescimento_Acumulado"])
+            rank_pib   = int(pf.sort_values("PIB_2023_USD_Bilhões", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_PIB_2023"])
+            rank_pibpc = int(pf.sort_values("PIB_por_Habitante_2023_USD", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_PIBpc_2023"])
+            rank_cresc = int(pf.sort_values("Crescimento_Acumulado_2000_2023_%", ascending=False).reset_index(drop=True).index[pf["Código_ISO3"].values == "AGO"][0]) + 1 if "AGO" in pf["Código_ISO3"].values else int(ago_data["Ranking_Crescimento_Acumulado"])
 
             denom = max(n_paises - 1, 1)
-            dims = {
+            dims  = {
                 "PIB (rank inv.)":   1 - (rank_pib   - 1) / denom,
                 "PIBpc (rank inv.)": 1 - (rank_pibpc - 1) / denom,
                 "Crescimento":       1 - (rank_cresc  - 1) / denom,
@@ -432,7 +417,8 @@ def render(p, s, r, m):
                 ),
                 showlegend=False,
                 paper_bgcolor=CARD, plot_bgcolor=CARD,
-                height=340, margin=dict(l=20, r=20, t=20, b=20),
+                height=chart_height("radar"),
+                margin=dict(l=20, r=20, t=20, b=20),
                 font=dict(color=MUTED),
                 hoverlabel=dict(bgcolor="#1A1A2E", font_color=WHITE),
             )
@@ -446,6 +432,5 @@ def render(p, s, r, m):
             st.plotly_chart(fig_r, use_container_width=True)
 
 
-# ── Utilitário interno (evita import pandas no topo só para concat) ───────────
 import pandas as _pd
 def import_concat(dfs): return _pd.concat(dfs, ignore_index=True)
