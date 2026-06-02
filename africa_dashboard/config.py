@@ -38,6 +38,24 @@ html, body, [data-testid="stApp"] {
 #MainMenu, footer,
 [data-testid="stDecoration"] { display:none !important; }
 
+/* Estiliza o botão nativo >> de reabrir sidebar */
+[data-testid="stSidebarCollapsedControl"] {
+    top: 1rem !important;
+}
+[data-testid="stSidebarCollapsedControl"] button {
+    background: #0A0A16 !important;
+    border: 1px solid #1E1E32 !important;
+    color: #E8720A !important;
+    border-radius: 6px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+}
+[data-testid="stSidebarCollapsedControl"] button:hover {
+    background: #1E1E32 !important;
+    border-color: #E8720A !important;
+}
+
 .block-container {
     padding: 1.5rem 2rem 3rem !important;
     max-width: 1440px !important;
