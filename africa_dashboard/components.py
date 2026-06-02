@@ -14,9 +14,35 @@ PLOTLY_BASE = dict(
     hoverlabel=dict(bgcolor="#1A1A2E", font_color=WHITE, font_size=12),
 )
 
+# Alturas base por tipo de gráfico usadas em todo o projecto.
+# Ajustam automaticamente o tamanho sem valores fixos espalhados por cada ficheiro.
+HEIGHTS = {
+    "map":      420,   # coroplético precisa de mais altura
+    "bar_h":    320,   # bar horizontal (rankings, dívida, inflação)
+    "bar_v":    300,   # bar vertical (comparações, crescimento)
+    "line":     360,   # séries temporais
+    "scatter":  360,   # scatter / bubble
+    "radar":    320,   # polar / radar
+    "lollipop": 320,   # dot/lollipop chart
+    "default":  320,
+}
+
+
+def chart_height(kind="default", n_items=None):
+    """
+    Devolve a altura do gráfico em px.
+    Para bar horizontal, escala com o número de itens para evitar
+    barras demasiado comprimidas ou gráficos com muito espaço vazio.
+    """
+    base = HEIGHTS.get(kind, HEIGHTS["default"])
+    if kind in ("bar_h", "lollipop") and n_items is not None:
+        # Mínimo de 24px por item, máximo de 600px
+        return max(base, min(n_items * 24, 600))
+    return base
+
 
 def kpi(label, value, sub=None, color="white"):
-    cls = {"green":"kpi-pos","red":"kpi-neg","warn":"kpi-warn"}.get(color,"kpi-value")
+    cls = {"green": "kpi-pos", "red": "kpi-neg", "warn": "kpi-warn"}.get(color, "kpi-value")
     sub_html = f'<div class="kpi-sub">{sub}</div>' if sub else ""
     st.markdown(f"""
     <div class="kpi">
@@ -27,7 +53,7 @@ def kpi(label, value, sub=None, color="white"):
 
 
 def insight(text, kind="default"):
-    cls = {"angola":"insight angola","warn":"insight warn"}.get(kind,"insight")
+    cls = {"angola": "insight angola", "warn": "insight warn"}.get(kind, "insight")
     st.markdown(f'<div class="{cls}">{text}</div>', unsafe_allow_html=True)
 
 
@@ -41,10 +67,20 @@ def section(title, badge=None):
     </div>""", unsafe_allow_html=True)
 
 
-def fig_base(title="", height=380):
-    layout = {**PLOTLY_BASE, "height": height}
+def fig_base(title="", height=None, kind="default", n_items=None):
+    """
+    Cria uma figura Plotly com o layout base do projecto.
+    Se height não for passado, usa chart_height(kind, n_items).
+    """
+    h = height if height is not None else chart_height(kind, n_items)
+    layout = {**PLOTLY_BASE, "height": h}
     if title:
-        layout["title"] = dict(text=title, font=dict(color=WHITE, size=13, weight=600), x=0, pad=dict(l=4))
+        layout["title"] = dict(
+            text=title,
+            font=dict(color=WHITE, size=13, weight=600),
+            x=0,
+            pad=dict(l=4),
+        )
     fig = go.Figure()
     fig.update_layout(**layout)
     return fig
