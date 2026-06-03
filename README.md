@@ -34,7 +34,7 @@ posição #8 em África, e a tensão entre crescimento macroeconómico e bem-est
 
 ```
 africa_dashboard/
-├── app.py                  # Entrada principal — Streamlit
+├── app.py                  # Entrada principal: Streamlit
 ├── _africa.py              # Dashboard África
 ├── _angola.py              # Dashboard Angola
 ├── financas.py             # Dashboard Finanças Públicas
